@@ -1,9 +1,9 @@
 package omnicomm.program;
 
-public class myfirstprogram {
-	
-	public static void main(String[] args) {
-		System.out.println("hello,world");
-	}
-	
+public class MyFirstProgram {
+
+  public static void mainMethod(String[] args) {
+    System.out.println("hello,world");
+  }
+
 }
