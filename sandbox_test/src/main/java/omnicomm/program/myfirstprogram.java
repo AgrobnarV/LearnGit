@@ -1,3 +1,5 @@
+package omnicomm.program;
+
 public class myfirstprogram {
 	
 	public static void main(String[] args) {
