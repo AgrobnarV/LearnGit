@@ -3,13 +3,24 @@ package omnicomm.program;
 public class MyFirstProgram {
 
   public static void main(String[] args) {
-    String hi = "Hello"; // переменная для hello
-    String smb = "world"; // переменная для world
-    System.out.println(hi + "," + smb + "!"); // выводим строку hello,world
+    hello("Andrey"); // вызвать имя пользователя
 
-    double l = 8; //значение стороны квадрата
-    double s = l * l; //формула расчета площади
-    System.out.println("Площадь квадрата со стороной " + l +  " = " + s); //считаем площадь квадрата по сторонам
+    double l = 5.4; // сторона квадрата
+    System.out.println("Площадь квадрата со стороной " + l + " = " + area(l)); // считаем площадь квадрата по стороне
+
+    double a = 2; // длина прямоугольника
+    double b = 3; // ширина прямоугольника
+    System.out.println("Площадь прямоугольника со сторонами " + a + " и " + b + " = " + area(a,b)); //считаем площадь прямоугольника по сторонам
+  }
+  public static void hello (String user) { // приветствие пользователя
+    System.out.println("hello," + user + "."); // вывод строки приветствия
   }
 
+  public static double area (double len) { // расчет площади из стороны квадрата
+    return len * len; // формула расчета площади
+  }
+  public static double area (double a, double b) { // расчет площади из сторон прямоугольника
+    return a * b; // формула расчета площади
+
+  }
 }
