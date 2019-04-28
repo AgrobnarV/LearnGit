@@ -3,10 +3,12 @@ package omnicomm.program;
 public class MyFirstProgram {
 
   public static void main(String[] args) {
-    System.out.println("hello," + "world"); // выводим строку hello,world
+    String hi = "Hello"; // переменная для hello
+    String smb = "world"; // переменная для world
+    System.out.println(hi + "," + smb + "!"); // выводим строку hello,world
 
-    int l = 2; //значение стороны квадрата
-    int s = l * l; //формула расчета площади
+    double l = 8; //значение стороны квадрата
+    double s = l * l; //формула расчета площади
     System.out.println("Площадь квадрата со стороной " + l +  " = " + s); //считаем площадь квадрата по сторонам
   }
 
