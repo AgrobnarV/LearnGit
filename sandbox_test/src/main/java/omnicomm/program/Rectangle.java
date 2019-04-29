@@ -10,6 +10,5 @@ public class Rectangle { // класс Прямоугольник
   }
   public double area () { // расчет площади из сторон прямоугольника
     return this.a * this.b; // формула расчета площади прямоугольника
-
   }
 }
