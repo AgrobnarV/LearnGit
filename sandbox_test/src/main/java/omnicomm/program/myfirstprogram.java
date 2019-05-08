@@ -1,6 +1,6 @@
 package omnicomm.program;
 
-public class MyFirstProgram {
+public class myfirstprogram {
 
   public static void main(String[] args) {
     hello("Andrey"); // вызвать имя пользователя
