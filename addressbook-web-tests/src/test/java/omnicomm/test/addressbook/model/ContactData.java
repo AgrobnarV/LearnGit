@@ -1,4 +1,4 @@
-package omnicomm.test.addressbook;
+package omnicomm.test.addressbook.model;
 
 public class ContactData {
   private final String firstname;

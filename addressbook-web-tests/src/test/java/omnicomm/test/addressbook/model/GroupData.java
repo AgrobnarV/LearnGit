@@ -1,4 +1,4 @@
-package omnicomm.test.addressbook;
+package omnicomm.test.addressbook.model;
 
 public class GroupData {
   private final String gname;
