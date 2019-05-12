@@ -40,5 +40,7 @@ public class GroupHelper {
   public void selectGroup() {
     wd.findElement(By.name("selected[]")).click();
   }
-
+  public void clicktoGroupCheckbox() {
+    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test2'])[1]/input[1]")).click();
+  }
 }

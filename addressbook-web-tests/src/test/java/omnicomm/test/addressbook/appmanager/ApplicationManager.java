@@ -27,14 +27,7 @@ public class ApplicationManager {
     sessionHelper.login("admin", "secret");
   }
 
-  public void clicktoGroupCheckbox() {
-    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test2'])[1]/input[1]")).click();
-  }
-
   public void stop() {
-    wd.findElement(By.linkText("Logout")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
     wd.quit();
   }
 
