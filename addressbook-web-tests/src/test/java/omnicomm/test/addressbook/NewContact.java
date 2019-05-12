@@ -1,12 +1,11 @@
 package omnicomm.test.addressbook;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 import org.testng.annotations.*;
-import static org.testng.Assert.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class NewContact {
   private WebDriver wd;
@@ -18,6 +17,7 @@ public class NewContact {
     wd.get("http://localhost/addressbook/index.php");
     login("admin", "secret");
   }
+
   private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
@@ -30,23 +30,40 @@ public class NewContact {
 
   @Test
   public void testNewContact() throws Exception {
-    wd.findElement(By.linkText("add new")).click();
+    initContactCreation();
+    fillContactform("Andrey", "Bandin","Russia,Moscow", "+1234567890", "test@yandex.ru");
+    submitContactCreation();
+    returnToHomepage();
+  }
+
+  private void returnToHomepage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
+  private void submitContactCreation() {
+    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]")).click();
+  }
+
+  private void fillContactform(String firstname, String lastname, String address, String telephone, String email) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys("Andrew");
+    wd.findElement(By.name("firstname")).sendKeys(firstname);
+    wd.findElement(By.name("lastname")).click();
     wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys("Voronin");
+    wd.findElement(By.name("lastname")).sendKeys(lastname);
     wd.findElement(By.name("address")).click();
     wd.findElement(By.name("address")).clear();
-    wd.findElement(By.name("address")).sendKeys("test2,test3");
+    wd.findElement(By.name("address")).sendKeys(address);
     wd.findElement(By.name("home")).click();
     wd.findElement(By.name("home")).clear();
-    wd.findElement(By.name("home")).sendKeys("+71234567890");
+    wd.findElement(By.name("home")).sendKeys(telephone);
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys("test1@mail.ru");
-    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]")).click();
-    wd.findElement(By.linkText("home page")).click();
+    wd.findElement(By.name("email")).sendKeys(email);
+  }
+
+  private void initContactCreation() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterMethod(alwaysRun = true)
