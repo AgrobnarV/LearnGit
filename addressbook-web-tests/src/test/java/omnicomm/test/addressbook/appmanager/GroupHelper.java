@@ -4,43 +4,38 @@ import omnicomm.test.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class GroupHelper {
-  private WebDriver wd;
+public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
   public void returntoGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
+    submit(By.linkText("group page"));
   }
 
   public void submitGroupCreation() {
-    wd.findElement(By.name("submit")).click();
+    submit(By.name("submit"));
   }
 
   public void fillGroupForm(GroupData groupData) {
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(groupData.getGname());
-    wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(groupData.getGheader());
-    wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(groupData.getGfooter());
+    type(By.name("group_name"), groupData.getGname());
+    type(By.name("group_header"), groupData.getGheader());
+    type(By.name("group_footer"), groupData.getGfooter());
   }
 
   public void initGroupCreation() {
-    wd.findElement(By.name("new")).click();
+    submit(By.name("new"));
   }
 
   public void deleteSelectedGroups() {
-    wd.findElement(By.xpath("(//input[@name='delete'])")).click();
+    submit(By.xpath("(//input[@name='delete'])"));
   }
 
   public void selectGroup() {
-    wd.findElement(By.name("selected[]")).click();
+    submit(By.name("selected[]"));
   }
   public void clicktoGroupCheckbox() {
-    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test2'])[1]/input[1]")).click();
+    submit(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test2'])[1]/input[1]"));
   }
 }
