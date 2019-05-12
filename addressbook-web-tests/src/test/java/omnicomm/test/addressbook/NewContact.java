@@ -1,13 +1,14 @@
 package omnicomm.test.addressbook;
 
+import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-
 import org.testng.annotations.*;
-
+import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
-public class GroupCreationTests {
+public class NewContact {
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
@@ -17,7 +18,6 @@ public class GroupCreationTests {
     wd.get("http://localhost/addressbook/index.php");
     login("admin", "secret");
   }
-
   private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
@@ -29,43 +29,24 @@ public class GroupCreationTests {
   }
 
   @Test
-  public void testGroupCreation() throws Exception {
-    gotoGroupPage();
-    initGroupCreation();
-    fillGroupForm(new GroupData("test2", "test33", "test45"));
-    submitGroupCreation();
-    returntoGroupPage();
-    clicktoGroupCheckbox();
-  }
-
-  private void clicktoGroupCheckbox() {
-    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test2'])[1]/input[1]")).click();
-  }
-
-  private void returntoGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
-  }
-
-  private void submitGroupCreation() {
-    wd.findElement(By.name("submit")).click();
-  }
-
-  private void fillGroupForm(GroupData groupData) {
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(groupData.getGname());
-    wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(groupData.getGheader());
-    wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(groupData.getGfooter());
-  }
-
-  private void initGroupCreation() {
-    wd.findElement(By.name("new")).click();
-  }
-
-  private void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+  public void testNewContact() throws Exception {
+    wd.findElement(By.linkText("add new")).click();
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys("Andrew");
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys("Voronin");
+    wd.findElement(By.name("address")).click();
+    wd.findElement(By.name("address")).clear();
+    wd.findElement(By.name("address")).sendKeys("test2,test3");
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name("home")).sendKeys("+71234567890");
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys("test1@mail.ru");
+    wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]")).click();
+    wd.findElement(By.linkText("home page")).click();
   }
 
   @AfterMethod(alwaysRun = true)
