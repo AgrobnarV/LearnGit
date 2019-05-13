@@ -36,6 +36,6 @@ public class GroupHelper extends HelperBase {
     submit(By.name("selected[]"));
   }
   public void clicktoGroupCheckbox() {
-    submit(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test2'])[1]/input[1]"));
+    submit(By.xpath("(//input[@name='selected[]'])[2]"));
   }
 }
