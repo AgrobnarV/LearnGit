@@ -12,11 +12,11 @@ public class HelperBase {
     this.wd = wd;
   }
 
-  protected void submit(By locator) {
+  public void submit(By locator) {
     click(locator);
   }
 
-  protected void click(By locator) {
+  public void click(By locator) {
     wd.findElement(locator).click();
   }
 
