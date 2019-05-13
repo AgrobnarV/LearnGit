@@ -28,4 +28,22 @@ public class ContactHelper extends HelperBase {
   public void initContactCreation() {
     click(By.linkText("add new"));
   }
+
+  public void clickSearchField() {
+    click(By.name("searchstring"));
+  }
+
+  public void fillSearchForm() {
+    searchform(By.name("searchstring"), "Anton");
+  }
+
+  private void searchform(By locator, String text) {
+    click(locator);
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
+  }
+
+  public void clickAllContacts() {
+    click(By.xpath("//input[@id='MassCB']"));
+  }
 }
