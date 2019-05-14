@@ -2,7 +2,7 @@ package omnicomm.test.addressbook.tests;
 
 import org.testng.annotations.Test;
 
-public class SearchContacts extends TestBase {
+public class ContactSearchTests extends TestBase {
   @Test
   public void testSearchContacts () {
     app.getContactHelper().clickSearchField();

@@ -3,7 +3,7 @@ package omnicomm.test.addressbook.tests;
 import omnicomm.test.addressbook.model.ContactData;
 import org.testng.annotations.Test;
 
-public class NewContact extends TestBase {
+public class ContactAddTests extends TestBase {
 
   @Test
   public void testNewContact() throws Exception {

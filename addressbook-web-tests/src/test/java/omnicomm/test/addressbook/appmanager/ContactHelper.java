@@ -57,7 +57,23 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void clicktoDetails() {
+  public void clicktoDetailsPic() {
     click(By.xpath("//img[@alt='Details']"));
+  }
+
+  public void clicktoModify() {
+    click(By.name("modifiy"));
+  }
+
+  public void clicktoUpdate() {
+    click(By.name("update"));
+  }
+
+  public void clicktoEditPic() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void DeleteContact() {
+    click(By.xpath("(//input[@name='update'])[3]")); // нажимаем кнопку Delete
   }
 }
