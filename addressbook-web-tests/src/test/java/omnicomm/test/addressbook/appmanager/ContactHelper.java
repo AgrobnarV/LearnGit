@@ -56,4 +56,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
   }
+
+  public void clicktoDetails() {
+    click(By.xpath("//img[@alt='Details']"));
+  }
 }
