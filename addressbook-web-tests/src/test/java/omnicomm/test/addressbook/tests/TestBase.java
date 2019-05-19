@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 
 public class TestBase {
 
-  public final ApplicationManager app = new ApplicationManager(BrowserType.IE);
+  public final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)

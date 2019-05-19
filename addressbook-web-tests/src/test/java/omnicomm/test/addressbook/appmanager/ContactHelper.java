@@ -40,8 +40,10 @@ public class ContactHelper extends HelperBase {
 
   public void type(By locator, String text) {
     click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+    if (text != null) {
+      wd.findElement(locator).clear();
+      wd.findElement(locator).sendKeys(text);
+    }
   }
 
   public void clickAllContacts() {
