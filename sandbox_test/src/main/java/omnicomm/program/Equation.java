@@ -33,7 +33,7 @@ public class Equation {
     } else {
       num = -1;
     }
-    
+
 
 
 
