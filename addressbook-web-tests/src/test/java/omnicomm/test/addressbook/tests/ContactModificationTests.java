@@ -8,7 +8,7 @@ public class ContactModificationTests extends TestBase {
   public void testModificationContactbyIcon () throws Exception {
     app.getNavigationHelper().gotoHomePage();
     app.getContactHelper().clicktoEditPic();
-    app.getContactHelper().fillContactform(new ContactData("Evgeniy", "Kotukhov", null, null, "test2@gmail.net"));
+    app.getContactHelper().fillContactform(new ContactData("test1", "test2", null, null, "test3@gmail.net", null),false);
     app.getContactHelper().clicktoUpdate();
     app.getContactHelper().returnToHomepage();
 
