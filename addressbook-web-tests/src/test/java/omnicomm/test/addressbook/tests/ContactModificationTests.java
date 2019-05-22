@@ -7,10 +7,10 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testModificationContactbyIcon () throws Exception {
     app.getNavigationHelper().gotoHomePage();
-    app.getContactHelper().clicktoEditPic();
-    app.getContactHelper().fillContactform(new ContactData("test1", "test2", null, null, "test3@gmail.net", null),false);
-    app.getContactHelper().clicktoUpdate();
-    app.getContactHelper().returnToHomepage();
+    if (! app.getContactHelper().isThereaContact()) {
+      app.getContactHelper().createContact (new ContactData("primer1", "primer2", "Moscow", "+1234567890", "primer2@mail.ru", "one"),true);
+    }
+    app.getContactHelper().modificationContact(new ContactData("test1", "test2", null, "+99999", "test3@yahoo.net", null),false);
 
   }
 }

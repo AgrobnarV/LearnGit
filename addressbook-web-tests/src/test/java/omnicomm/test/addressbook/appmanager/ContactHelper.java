@@ -88,4 +88,22 @@ public class ContactHelper extends HelperBase {
   public void DeleteContact() {
     click(By.xpath("(//input[@name='update'])[3]")); // нажимаем кнопку Delete
   }
+
+  public boolean isThereaContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void createContact(ContactData contact, boolean b) {
+    initContactCreation();
+    fillContactform(contact,b);
+    submitContactCreation();
+    returnToHomepage();
+  }
+
+  public void modificationContact(ContactData contact, boolean b) {
+    clicktoEditPic();
+    fillContactform(contact,b);
+    clicktoUpdate();
+    returnToHomepage();
+  }
 }
