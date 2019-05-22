@@ -101,7 +101,18 @@ public class ContactHelper extends HelperBase {
   }
 
   public void modificationContact(ContactData contact, boolean b) {
-    clicktoEditPic();
+    fillContactform(contact,b);
+    clicktoUpdate();
+    returnToHomepage();
+  }
+
+  public void deleteContactbyDetails() {
+    DeleteContact();
+    returnToHomepage();
+  }
+
+  public void modificationContactbyDetails(ContactData contact, boolean b) {
+    clicktoModify();
     fillContactform(contact,b);
     clicktoUpdate();
     returnToHomepage();

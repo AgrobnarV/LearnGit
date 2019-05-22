@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBase {
     if (! app.getContactHelper().isThereaContact()) {
       app.getContactHelper().createContact (new ContactData("primer1", "primer2", "Moscow", "+1234567890", "primer2@mail.ru", "one"),true);
     }
+    app.getContactHelper().clicktoEditPic();
     app.getContactHelper().modificationContact(new ContactData("test1", "test2", null, "+99999", "test3@yahoo.net", null),false);
-
   }
 }
