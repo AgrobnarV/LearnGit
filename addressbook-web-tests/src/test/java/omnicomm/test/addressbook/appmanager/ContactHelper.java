@@ -12,8 +12,7 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToHomepage() {
-    submit(By.linkText("home"));
+  public void returnToHomepage() { submit(By.linkText("home"));
   }
 
   public void submitContactCreation() {
