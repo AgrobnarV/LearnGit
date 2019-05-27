@@ -32,12 +32,8 @@ public class GroupHelper extends HelperBase {
     submit(By.xpath("(//input[@name='delete'])"));
   }
 
-  public void selectGroup() {
-    submit(By.name("selected[]"));
-  }
-
-  public void clicktoGroupCheckbox() {
-    submit(By.xpath("(//input[@name='selected[]'])[2]"));
+  public void selectGroup(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void initGroupModification() {
