@@ -3,8 +3,12 @@ package omnicomm.test.addressbook.appmanager;
 import omnicomm.test.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -12,8 +16,7 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToHomepage() { submit(By.linkText("home"));
-  }
+  public void returnToHomepage() { submit(By.linkText("home")); }
 
   public void submitContactCreation() {
     click(By.xpath("(//input[@name='submit'])[2]"));
@@ -60,8 +63,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[@id='MassCB']"));
   }
 
-  public void selectContact() {
-    submit(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void deleteSelectedContact() {
@@ -116,5 +119,22 @@ public class ContactHelper extends HelperBase {
     fillContactform(contact,b);
     clicktoUpdate();
     returnToHomepage();
+  }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+    for (WebElement element : elements) {
+      List<WebElement> elements_table = element.findElements(By.tagName("td"));
+      String lname = elements_table.get(2).getText();
+      String fname = elements_table.get(3).getText();
+      ContactData contact = new ContactData(lname, fname,null, null,null,null);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }

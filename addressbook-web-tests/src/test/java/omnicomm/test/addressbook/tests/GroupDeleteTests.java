@@ -11,10 +11,10 @@ public class GroupDeleteTests extends TestBase {
   @Test
   public void testGroupDelete() throws Exception {
     app.getNavigationHelper().gotoGroupPage();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
     if (! app.getGroupHelper().isThereaGroup()) {
       app.getGroupHelper().createGroup (new GroupData("test2", null, null));
     }
+    List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup(before.size() - 1); // выбираем последнюю запись
     app.getGroupHelper().deleteSelectedGroups();
     app.getGroupHelper().returntoGroupPage();

@@ -2,7 +2,7 @@ package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.model.GroupData;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
