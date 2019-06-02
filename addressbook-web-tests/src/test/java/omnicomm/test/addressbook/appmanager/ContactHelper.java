@@ -16,7 +16,9 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToHomepage() { submit(By.linkText("home")); }
+  public void returnToHomepage() {
+    submit(By.linkText("home"));
+  }
 
   public void submitContactCreation() {
     click(By.xpath("(//input[@name='submit'])[2]"));
@@ -31,21 +33,13 @@ public class ContactHelper extends HelperBase {
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else{
-      Assert.assertFalse (isElementPresent(By.name("new_group")));
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
   public void initContactCreation() {
     click(By.linkText("add new"));
-  }
-
-  public void clickSearchField() {
-    click(By.name("searchstring"));
-  }
-
-  public void fillSearchForm() {
-    type(By.name("searchstring"), "Anton");
   }
 
   public void type(By locator, String text) {
@@ -59,10 +53,6 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void clickAllContacts() {
-    click(By.xpath("//input[@id='MassCB']"));
-  }
-
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
@@ -70,14 +60,6 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
-  }
-
-  public void clicktoDetailsPic() {
-    click(By.xpath("//img[@alt='Details']"));
-  }
-
-  public void clicktoModify() {
-    click(By.name("modifiy"));
   }
 
   public void clicktoUpdate() {
@@ -88,9 +70,6 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//img[@alt='Edit']"));
   }
 
-  public void DeleteContact() {
-    click(By.xpath("(//input[@name='update'])[3]")); // нажимаем кнопку Delete
-  }
 
   public boolean isThereaContact() {
     return isElementPresent(By.name("selected[]"));
@@ -98,28 +77,17 @@ public class ContactHelper extends HelperBase {
 
   public void createContact(ContactData contact, boolean b) {
     initContactCreation();
-    fillContactform(contact,b);
+    fillContactform(contact, b);
     submitContactCreation();
     returnToHomepage();
   }
 
   public void modificationContact(ContactData contact, boolean b) {
-    fillContactform(contact,b);
+    fillContactform(contact, b);
     clicktoUpdate();
     returnToHomepage();
   }
 
-  public void deleteContactbyDetails() {
-    DeleteContact();
-    returnToHomepage();
-  }
-
-  public void modificationContactbyDetails(ContactData contact, boolean b) {
-    clicktoModify();
-    fillContactform(contact,b);
-    clicktoUpdate();
-    returnToHomepage();
-  }
 
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
@@ -130,9 +98,10 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> elements_table = element.findElements(By.tagName("td"));
-      String lname = elements_table.get(2).getText();
-      String fname = elements_table.get(3).getText();
-      ContactData contact = new ContactData(lname, fname,null, null,null,null);
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      String lname = elements_table.get(1).getText();
+      String fname = elements_table.get(2).getText();
+      ContactData contact = new ContactData(id, fname, lname,null,null,null,null);
       contacts.add(contact);
     }
     return contacts;
