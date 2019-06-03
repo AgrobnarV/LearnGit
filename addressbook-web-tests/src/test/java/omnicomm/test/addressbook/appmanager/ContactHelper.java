@@ -18,7 +18,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void returnToHomepage() {
-    wd.findElement(By.linkText("home")).click();
+    click(By.linkText("home"));
   }
 
   public void submitContactCreation() {

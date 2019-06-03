@@ -12,7 +12,7 @@ public class ContactModificationTests extends TestBase {
   public void testModificationContactbyIcon() throws Exception {
     app.getNavigationHelper().gotoHomePage();
     if (!app.getContactHelper().isThereaContact()) {
-      app.getContactHelper().createContact(new ContactData("primer2", "primer3", null, null, null, null));
+      app.getContactHelper().createContact(new ContactData(null, null, "test3", "test4", "test1@test.ru", "test5"));
     }
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size() - 1);
