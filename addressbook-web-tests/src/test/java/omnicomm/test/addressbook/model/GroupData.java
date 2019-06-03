@@ -9,7 +9,7 @@ public class GroupData {
   private final String gfooter;
 
   public GroupData(String gname, String gheader, String gfooter) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.gname = gname;
     this.gheader = gheader;
     this.gfooter = gfooter;
@@ -19,28 +19,6 @@ public class GroupData {
     this.gname = gname;
     this.gheader = gheader;
     this.gfooter = gfooter;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    GroupData groupData = (GroupData) o;
-    return id == groupData.id &&
-            Objects.equals(gname, groupData.gname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, gname);
-  }
-
-  @Override
-  public String toString() {
-    return "GroupData{" +
-            "id='" + id + '\'' +
-            ", gname='" + gname + '\'' +
-            '}';
   }
 
   public int getId() { return id;  }
@@ -59,5 +37,26 @@ public class GroupData {
 
   public String getGfooter() {
     return gfooter;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    GroupData groupData = (GroupData) o;
+    return Objects.equals(gname, groupData.gname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(gname);
+  }
+
+  @Override
+  public String toString() {
+    return "GroupData{" +
+            "id='" + id + '\'' +
+            ", gname='" + gname + '\'' +
+            '}';
   }
 }

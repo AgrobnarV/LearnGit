@@ -4,7 +4,7 @@ import omnicomm.test.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactAddTests extends TestBase {
@@ -12,20 +12,14 @@ public class ContactAddTests extends TestBase {
   @Test
   public void testNewContact() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
-    ContactData contact = new ContactData("primer1", "primer2", "Moscow", "+1234567890", "primer2@mail.ru", "one");
-    app.getContactHelper().createContact(contact, true);
+    ContactData contact = new ContactData("test23", "test33", "Moscow123", "+1234567890", "primer2@mail.ru", "test2");
+    app.getContactHelper().createContact(contact);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
-
-    int max = 0;
-    for (ContactData g : after) {
-      if (g.getId() > max) {
-        max = g.getId();
-      }
-    }
-    contact.setId(max);
-
     before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 }
