@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
-  @BeforeMethod
+  @BeforeMethod (enabled = false)
   public void ensurePrecondition() {
     app.getNavigationHelper().gotoGroupPage();
     if (!app.getGroupHelper().isThereaGroup()) {
@@ -18,7 +18,7 @@ public class GroupModificationTests extends TestBase {
     }
   }
 
-  @Test
+  @Test (enabled = false)
   public void testGroupModification() {
 
     List<GroupData> before = app.getGroupHelper().getGroupList();

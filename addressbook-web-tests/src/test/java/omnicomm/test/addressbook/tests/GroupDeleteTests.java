@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GroupDeleteTests extends TestBase {
 
-  @BeforeMethod
+  @BeforeMethod (enabled = false)
   public void ensurePrecondition() {
     app.getNavigationHelper().gotoGroupPage();
     if (! app.getGroupHelper().isThereaGroup()) {
@@ -17,7 +17,7 @@ public class GroupDeleteTests extends TestBase {
     }
   }
 
-  @Test
+  @Test (enabled = false)
   public void testGroupDelete() throws Exception {
     List<GroupData> before = app.getGroupHelper().getGroupList();
     int index = before.size() - 1;
