@@ -8,7 +8,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
-  @Test
+
+  @Test (enabled = false)
   public void testModificationContactbyIcon() throws Exception {
     app.getNavigationHelper().gotoHomePage();
     if (!app.getContactHelper().isThereaContact()) {

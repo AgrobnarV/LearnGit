@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ContactAddTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testNewContact() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
     ContactData contact = new ContactData(null, null, "Moscow123", "+1234567890", "primer2@mail.ru", "test2");
