@@ -61,6 +61,7 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
 
   public void clicktoUpdate() {
