@@ -68,8 +68,8 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void clicktoEditPic() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void clicktoEditPic(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
 
@@ -88,10 +88,6 @@ public class ContactHelper extends HelperBase {
     fillContactform(new ContactData("test23", "test33", "test123", "1213213", "s1211@mail.ru", "test2"));
     clicktoUpdate();
     returnToHomepage();
-  }
-
-  public int getContactCount() {
-    return  wd.findElements(By.name("selected[]")).size();
   }
 
   public List<ContactData> getContactList() {

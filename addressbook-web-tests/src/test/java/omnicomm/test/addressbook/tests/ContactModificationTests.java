@@ -21,11 +21,11 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testModificationContactbyIcon() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().clicktoEditPic();
     int index = before.size() - 1;
+    app.getContactHelper().selectContact(index);
+    app.getContactHelper().clicktoEditPic(index);
     ContactData contact = new ContactData(before.get(index).getId(), "test1", "test2", "test3", "test4", "test5@test6.net", "test7");
     app.getContactHelper().modificationContact(contact);
-   // app.getContactHelper().selectContact(before.size() - 1);
 
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
