@@ -84,13 +84,13 @@ public class ContactHelper extends HelperBase {
     returnToHomepage();
   }
 
-  public void modificationContact(ContactData contactData) {
+  public void modifyContact(ContactData contactData) {
     fillContactform(new ContactData("test23", "test33", "test123", "1213213", "s1211@mail.ru", "test2"));
     clicktoUpdate();
     returnToHomepage();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> contList() {
     List<ContactData> contacts =new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for(WebElement element : elements) {

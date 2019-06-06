@@ -11,10 +11,10 @@ public class ContactAddTests extends TestBase {
 
   @Test
   public void testNewContact() throws Exception {
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().contList();
     ContactData contact = new ContactData(null, null, "Moscow123", "+1234567890", "primer2@mail.ru", "test2");
-    app.getContactHelper().createContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().createContact(contact);
+    List<ContactData> after = app.contact().contList();
     Assert.assertEquals(after.size(), before.size() + 1);
     before.add(contact);
     Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
