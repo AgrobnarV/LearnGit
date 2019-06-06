@@ -3,28 +3,33 @@ package omnicomm.test.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private int id;
-  private final String gname;
-  private final String gheader;
-  private final String gfooter;
+  private int id = Integer.MAX_VALUE;
+  private String gname;
+  private String gheader;
+  private String gfooter;
 
-  public GroupData(String gname, String gheader, String gfooter) {
-    this.id = Integer.MAX_VALUE;
-    this.gname = gname;
-    this.gheader = gheader;
-    this.gfooter = gfooter;
-  }
-  public GroupData(int id, String gname, String gheader, String gfooter) {
-    this.id = id;
-    this.gname = gname;
-    this.gheader = gheader;
-    this.gfooter = gfooter;
+  public int getId() {
+    return id;
   }
 
-  public int getId() { return id;  }
-
-  public void setId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public GroupData withGname(String gname) {
+    this.gname = gname;
+    return this;
+  }
+
+  public GroupData withGheader(String gheader) {
+    this.gheader = gheader;
+    return this;
+  }
+
+  public GroupData withGfooter(String gfooter) {
+    this.gfooter = gfooter;
+    return this;
   }
 
   public String getGname() {
@@ -59,4 +64,5 @@ public class GroupData {
             ", gname='" + gname + '\'' +
             '}';
   }
+
 }

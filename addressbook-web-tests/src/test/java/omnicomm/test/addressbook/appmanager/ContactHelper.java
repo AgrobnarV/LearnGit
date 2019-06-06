@@ -11,95 +11,97 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
-  private boolean creation;
 
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
-  public void returnToHomepage() {
-    click(By.linkText("home"));
-  }
-
-  public void submitContactCreation() {
-    click(By.name("submit"));
-  }
-
-  public void fillContactform(ContactData contactData) {
+  public void fillContactform(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getTelephone());
     type(By.name("email"), contactData.getEmail());
 
-    if ( creation) {
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
-      Assert.assertTrue(isElementPresent(By.name("new_group")));
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
-  public void initContactCreation() {
-    click(By.linkText("add new"));
+  public void returnContact() { click(By.linkText("home page")); }
+
+  public void homePage() {
+    click(By.linkText("home"));
   }
+
+  public void acceptAlertMessage() {
+    wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
+  }
+
+  public void click(By locator) { wd.findElement(locator).click(); }
+
+  public void submitContact() {
+    click(By.xpath("(//input[@name='submit'])[2]"));
+  }
+
+  public void buttonAddContact() { click(By.linkText("add new")); }
 
   public void type(By locator, String text) {
     click(locator);
-    if (text != null) {
-      String existingText = wd.findElement(locator).getAttribute("value");
-      if (!text.equals(existingText)) {
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
-      }
-    }
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
   }
 
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void deleteSelectedContact() {
-    click(By.xpath("//input[@value='Delete']"));
-    wd.switchTo().alert().accept();
-    wd.findElement(By.cssSelector("div.msgbox"));
+  public void createContact(ContactData contact) {
+    fillContactform(contact,true);
+    submitContact();
+    returnContact();
   }
 
-  public void clicktoUpdate() {
+  public void modify(int index, ContactData contact) {
+    selectContact(index);
+    picEdit(index);
+    fillContactform(contact, false);
+    buttonUpdate();
+    homePage();
+  }
+
+  public void buttonUpdate() {
     click(By.name("update"));
   }
 
-  public void clicktoEditPic(int index) {
+  public void picEdit(int index) {
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
-
-  public boolean isThereaContact() {
-    return isElementPresent(By.name("selected[]"));
+  public void delete(int index) {
+    selectContact(index);
+    deletionButton();
+    acceptAlertMessage();
+    homePage();
   }
 
-  public void createContact(ContactData contactData)  {
-    initContactCreation();
-    fillContactform (new ContactData("test23", "test33", "test6788", "98343434343", "shjkfjksfs@mail.ru", "test1"));
-    submitContactCreation();
-    returnToHomepage();
-  }
-
-  public void modifyContact(ContactData contactData) {
-    fillContactform(new ContactData("test23", "test33", "test123", "1213213", "s1211@mail.ru", "test2"));
-    clicktoUpdate();
-    returnToHomepage();
+  public void deletionButton() {
+    click(By.xpath("//input[@value='Delete']"));
   }
 
   public List<ContactData> contList() {
-    List<ContactData> contacts =new ArrayList<ContactData>();
+    List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
-    for(WebElement element : elements) {
+
+    for (WebElement element : elements) {
       List<WebElement> elements1 = element.findElements(By.tagName("td"));
       String firstname = elements1.get(2).getText();
       String lastname = elements1.get(1).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(id, firstname, lastname);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
 
     return contacts;

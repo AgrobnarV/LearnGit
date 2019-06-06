@@ -14,7 +14,7 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
-  private ContactHelper contactHelper;
+  private ContactHelper contact;
   private String browser;
 
   public ApplicationManager(String browser) {
@@ -33,7 +33,7 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook");
     groupHelper = new GroupHelper(wd);
-    contactHelper = new ContactHelper(wd);
+    contact = new ContactHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login("admin", "secret");
@@ -52,7 +52,7 @@ public class ApplicationManager {
   }
 
   public ContactHelper contact() {
-    return contactHelper;
+    return contact;
   }
 
 }

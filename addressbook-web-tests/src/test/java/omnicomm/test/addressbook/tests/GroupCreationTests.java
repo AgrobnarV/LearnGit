@@ -9,12 +9,12 @@ import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
-  @Test (enabled = false)
+  @Test
   public void testGroupCreation() throws Exception {
     app.goTo().groupPage();
     List<GroupData> before = app.group().list();
-    GroupData group = new GroupData("test123", "test2", "test3");
-    app.group().createGroup(group);
+    GroupData group = new GroupData().withGname("test2");
+    app.group().create(group);
     List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(),before.size() + 1);
 
@@ -24,5 +24,6 @@ public class GroupCreationTests extends TestBase {
     after.sort(byId);
     Assert.assertEquals (before, after);
   }
+
 
 }

@@ -14,21 +14,32 @@ public class ContactModificationTests extends TestBase {
   public void ensurePrecondition () {
     app.goTo().homePage();
     if (app.contact().contList().size() == 0) {
-      app.contact().createContact(new ContactData(null, null, "test3", "test4", "test1@test.ru", "test5"));
+      app.contact().createContact(new ContactData()
+              .withFirstname("test1")
+              .withLastname("test2")
+              .withAddress("test3")
+              .withTelephone("test4")
+              .withEmail("test1@test.ru")
+              .withGroup("test5"));
     }
   }
 
   @Test
-  public void testModifyContactIcon() throws Exception {
+  public void testModifyContactIcon() {
     List<ContactData> before = app.contact().contList();
     int index = before.size() - 1;
-    app.contact().selectContact(index);
-    app.contact().clicktoEditPic(index);
-    ContactData contact = new ContactData(before.get(index).getId(), "test1", "test2", "test3", "test4", "test5@test6.net", "test7");
-    app.contact().modifyContact(contact);
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId())
+            .withFirstname("test1")
+            .withLastname("test2")
+            .withAddress("test3")
+            .withTelephone("test4")
+            .withEmail("test5@test6.ru")
+            .withGroup("test123");
 
+    app.contact().modify(index,contact);
     List<ContactData> after = app.contact().contList();
-    Assert.assertEquals(after.size(), before.size());
+    Assert.assertEquals(before.size(), after.size());
 
     before.remove(index);
     before.add(contact);

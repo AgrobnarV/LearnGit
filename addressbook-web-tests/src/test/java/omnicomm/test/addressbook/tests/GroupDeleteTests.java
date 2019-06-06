@@ -9,15 +9,15 @@ import java.util.List;
 
 public class GroupDeleteTests extends TestBase {
 
-  @BeforeMethod (enabled = false)
+  @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().groupPage();
     if (app.group().list().size() == 0) {
-      app.group().createGroup(new GroupData("test2", null, null));
+      app.group().create(new GroupData().withGname("test1"));
     }
   }
 
-  @Test (enabled = false)
+  @Test
   public void testGroupDelete() throws Exception {
     List<GroupData> before = app.group().list();
     int index = before.size() - 1;

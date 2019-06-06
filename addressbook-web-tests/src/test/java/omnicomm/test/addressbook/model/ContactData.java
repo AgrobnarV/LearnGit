@@ -3,48 +3,48 @@ package omnicomm.test.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private  String firstname;
-  private  String lastname;
-  private  String address;
-  private  String telephone;
-  private  String email;
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String lastname;
+  private String address;
+  private String telephone;
+  private String email;
   private String group;
 
-  public ContactData( String firstname, String lastname, String address, String telephone, String email, String group)  {
-    this.id = Integer.MAX_VALUE;
+  public ContactData withId(int id) { this.id = id; return this;}
+
+  public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
     this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
     this.address = address;
+    return this;
+  }
+
+  public ContactData withTelephone(String telephone) {
     this.telephone = telephone;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
     this.email = email;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
     this.group = group;
+    return this;
   }
-
-  public ContactData(int id, String firstname, String lastname, String address, String telephone, String email, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.address = address;
-    this.telephone = telephone;
-    this.email = email;
-    this.group = group;
-  }
-
-  public ContactData(int id, String firstName, String lastName) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-  }
-
-
 
   public int getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getFirstname() {

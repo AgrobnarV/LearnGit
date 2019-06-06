@@ -14,7 +14,11 @@ public class ContactDeleteTests extends TestBase {
   public void ensurePrecondition () {
     app.goTo().homePage();
     if (app.contact().contList().size() == 0) {
-      app.contact().createContact(new ContactData(null, null, "test3", "test4", "test1@test.ru", "test5"));
+      app.contact().createContact(new ContactData()
+              .withAddress("test3")
+              .withTelephone("test4")
+              .withEmail("test1@test.ru")
+              .withGroup("test5"));
     }
   }
 
@@ -22,16 +26,14 @@ public class ContactDeleteTests extends TestBase {
   public void testContactDelete() throws Exception {
     List<ContactData> before = app.contact().contList();
     int index = before.size() - 1;
-    app.contact().selectContact(index);
-    app.contact().deleteSelectedContact();
-  //  app.getNavigationHelper().gotoHomePage();
+    app.contact().delete(index);
     List<ContactData> after = app.contact().contList();
     Assert.assertEquals(after.size(), index);
+
     before.remove(index);
     Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
   }
-
 }
