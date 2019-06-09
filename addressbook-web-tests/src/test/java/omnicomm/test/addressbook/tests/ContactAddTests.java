@@ -4,14 +4,13 @@ import omnicomm.test.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactAddTests extends TestBase {
 
   @Test
   public void testNewContact() throws Exception {
-    List<ContactData> before = app.contact().contList();
+    Set<ContactData> before = app.contact().contAll();
     app.contact().buttonAddContact();
     ContactData contact = new ContactData()
             .withFirstname("test23")
@@ -21,13 +20,11 @@ public class ContactAddTests extends TestBase {
             .withEmail("primer2@mail.ru")
             .withGroup("one");
     app.contact().createContact(contact);
-    List<ContactData> after = app.contact().contList();
+    Set<ContactData> after = app.contact().contAll();
     Assert.assertEquals(after.size(), before.size() + 1);
 
+    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()); //максимум среди id всех контактов
     before.add(contact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
   }
 }
