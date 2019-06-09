@@ -1,16 +1,18 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.model.ContactData;
+import omnicomm.test.addressbook.model.Contacts;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeleteTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePrecondition () {
+  public void ensurePrecondition() {
     app.goTo().homePage();
     if (app.contact().contAll().size() == 0) {
       app.contact().createContact(new ContactData()
@@ -23,13 +25,12 @@ public class ContactDeleteTests extends TestBase {
 
   @Test
   public void testContactDelete() throws Exception {
-    Set<ContactData> before = app.contact().contAll();
+    Contacts before = app.contact().contAll();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
-    Set<ContactData> after = app.contact().contAll();
+    Contacts after = app.contact().contAll();
     Assert.assertEquals(after.size(), before.size() - 1);
-
-    before.remove(deletedContact);
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(
+            before.withoutContact(deletedContact)));
   }
 }

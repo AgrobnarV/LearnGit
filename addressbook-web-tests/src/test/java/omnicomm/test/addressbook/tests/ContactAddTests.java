@@ -1,16 +1,17 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.model.ContactData;
-import org.testng.Assert;
+import omnicomm.test.addressbook.model.Contacts;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactAddTests extends TestBase {
 
   @Test
   public void testNewContact() throws Exception {
-    Set<ContactData> before = app.contact().contAll();
+    Contacts before = app.contact().contAll();
     app.contact().buttonAddContact();
     ContactData contact = new ContactData()
             .withFirstname("test23")
@@ -20,11 +21,9 @@ public class ContactAddTests extends TestBase {
             .withEmail("primer2@mail.ru")
             .withGroup("one");
     app.contact().createContact(contact);
-    Set<ContactData> after = app.contact().contAll();
-    Assert.assertEquals(after.size(), before.size() + 1);
-
-    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()); //максимум среди id всех контактов
-    before.add(contact);
-    Assert.assertEquals(before, after);
+    Contacts after = app.contact().contAll();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));   //максимум среди id всех контактов
   }
 }

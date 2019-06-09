@@ -1,14 +1,13 @@
 package omnicomm.test.addressbook.appmanager;
 
 import omnicomm.test.addressbook.model.ContactData;
-import omnicomm.test.addressbook.model.GroupData;
+import omnicomm.test.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +32,9 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void returnContact() { click(By.linkText("home page")); }
+  public void returnContact() {
+    click(By.linkText("home page"));
+  }
 
   public void homePage() {
     click(By.linkText("home"));
@@ -44,13 +45,17 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
-  public void click(By locator) { wd.findElement(locator).click(); }
+  public void click(By locator) {
+    wd.findElement(locator).click();
+  }
 
   public void submitContact() {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void buttonAddContact() { click(By.linkText("add new")); }
+  public void buttonAddContact() {
+    click(By.linkText("add new"));
+  }
 
   public void type(By locator, String text) {
     click(locator);
@@ -64,7 +69,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    fillContactform(contact,true);
+    fillContactform(contact, true);
     submitContact();
     returnContact();
   }
@@ -97,8 +102,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[@value='Delete']"));
   }
 
-  public Set<ContactData> contAll() {
-    Set<ContactData> contacts = new HashSet<>();
+  public Contacts contAll() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
 
     for (WebElement element : elements) {
@@ -111,4 +116,11 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }

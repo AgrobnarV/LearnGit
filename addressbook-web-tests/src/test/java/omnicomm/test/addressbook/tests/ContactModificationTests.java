@@ -1,16 +1,18 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.model.ContactData;
+import omnicomm.test.addressbook.model.Contacts;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePrecondition () {
+  public void ensurePrecondition() {
     app.goTo().homePage();
     if (app.contact().contAll().size() == 0) {
       app.contact().createContact(new ContactData()
@@ -25,10 +27,10 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testModifyContactIcon() {
-    Set<ContactData> before = app.contact().contAll();
-    ContactData modifiedGroup = before.iterator().next();
+    Contacts before = app.contact().contAll();
+    ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
-            .withId(modifiedGroup.getId())
+            .withId(modifiedContact.getId())
             .withFirstname("test1")
             .withLastname("test2")
             .withAddress("test3")
@@ -37,11 +39,9 @@ public class ContactModificationTests extends TestBase {
             .withGroup("test123");
 
     app.contact().modify(contact);
-    Set<ContactData> after = app.contact().contAll();
+    Contacts after = app.contact().contAll();
     Assert.assertEquals(before.size(), after.size());
-
-    before.remove(modifiedGroup);
-    before.add(contact);
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(
+            before.withoutContact(modifiedContact).withAdded(contact)));
   }
 }
