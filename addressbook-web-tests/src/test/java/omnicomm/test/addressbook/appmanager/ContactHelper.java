@@ -8,9 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -87,7 +85,7 @@ public class ContactHelper extends HelperBase {
   }
 
   private void picEditById(int id) {
-    wd.findElement(By.xpath("//img[@alt='Edit']")).click();
+    click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
   }
 
 
