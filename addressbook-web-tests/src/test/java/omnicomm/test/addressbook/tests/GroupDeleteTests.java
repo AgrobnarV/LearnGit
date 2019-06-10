@@ -2,13 +2,11 @@ package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.model.GroupData;
 import omnicomm.test.addressbook.model.Groups;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class GroupDeleteTests extends TestBase {
 
@@ -25,8 +23,8 @@ public class GroupDeleteTests extends TestBase {
     Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
     app.group().delete(deletedGroup);
+    assertThat(app.group().count(), equalTo(before.size() - 1));
     Groups after = app.group().all();
-    assertEquals(after.size(), before.size() - 1);
     assertThat(after, equalTo(before.withoutGroup(deletedGroup)));
   }
 }

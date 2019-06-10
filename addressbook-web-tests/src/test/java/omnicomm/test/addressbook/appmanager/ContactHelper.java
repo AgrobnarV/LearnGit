@@ -106,11 +106,10 @@ public class ContactHelper extends HelperBase {
   private Contacts contactCache = null;
 
   public Contacts contAll() {
-    if(contactCache != null){
+    if (contactCache != null) {
       return new Contacts(contactCache);
     }
     contactCache = new Contacts();
-    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
 
     for (WebElement element : elements) {
@@ -118,7 +117,10 @@ public class ContactHelper extends HelperBase {
       String firstname = elements1.get(2).getText();
       String lastname = elements1.get(1).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      contactCache.add(new ContactData()
+              .withId(id)
+              .withFirstname(firstname)
+              .withLastname(lastname));
     }
     return new Contacts(contactCache);
   }
@@ -127,7 +129,7 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public int getContactCount() {
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 }

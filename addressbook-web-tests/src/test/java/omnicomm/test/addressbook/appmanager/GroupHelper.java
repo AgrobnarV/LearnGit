@@ -83,8 +83,17 @@ public class GroupHelper extends HelperBase {
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groupCache.add(new GroupData().withId(id).withGname(name));
+      groupCache.add(new GroupData()
+              .withId(id)
+              .withGname(name));
     }
     return new Groups(groupCache);
+  }
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }

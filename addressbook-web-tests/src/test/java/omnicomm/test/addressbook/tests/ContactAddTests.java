@@ -21,8 +21,8 @@ public class ContactAddTests extends TestBase {
             .withEmail("primer2@mail.ru")
             .withGroup("one");
     app.contact().createContact(contact);
+    assertThat(app.group().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().contAll();
-    assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));   //максимум среди id всех контактов
   }
