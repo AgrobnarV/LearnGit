@@ -43,6 +43,7 @@ public class ContactData {
     return this;
   }
 
+
   public int getId() {
     return id;
   }
@@ -71,6 +72,8 @@ public class ContactData {
     return group;
   }
 
+
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -93,4 +96,5 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
   }
+
 }

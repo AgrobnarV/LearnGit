@@ -20,6 +20,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
+    click(By.name("home"));
     type(By.name("home"), contactData.getTelephone());
     type(By.name("email"), contactData.getEmail());
 
@@ -110,19 +111,18 @@ public class ContactHelper extends HelperBase {
       return new Contacts(contactCache);
     }
     contactCache = new Contacts();
-    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+    List<WebElement> elemets = wd.findElements(By.xpath("//tr[@name='entry']"));
 
-    for (WebElement element : elements) {
+    for (WebElement element : elemets) {
       List<WebElement> elements1 = element.findElements(By.tagName("td"));
-      String firstname = elements1.get(2).getText();
-      String lastname = elements1.get(1).getText();
+      String firstName = elements1.get(2).getText();
+      String lastName = elements1.get(1).getText();
+
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData()
-              .withId(id)
-              .withFirstname(firstname)
-              .withLastname(lastname));
+      contactCache.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
     }
-    return new Contacts(contactCache);
+
+    return contactCache;
   }
 
   public boolean isThereAContact() {
