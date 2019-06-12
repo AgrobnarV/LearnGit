@@ -1,5 +1,6 @@
 package omnicomm.test.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -17,8 +18,12 @@ public class ContactData {
   private String allEmails;
   private String group;
   private String homepage;
+  private File photo;
 
-  public ContactData withId(int id) { this.id = id; return this;}
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
 
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
@@ -64,6 +69,7 @@ public class ContactData {
     this.emailHome = emailHome;
     return this;
   }
+
   public ContactData withEmailWork(String emailWork) {
     this.emailWork = emailWork;
     return this;
@@ -81,6 +87,12 @@ public class ContactData {
 
   public ContactData withHomepage(String homepage) {
     this.homepage = homepage;
+    return this;
+  }
+
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 
@@ -105,13 +117,17 @@ public class ContactData {
     return telephone;
   }
 
-  public String getWorkPhone() {return workPhone;}
+  public String getWorkPhone() {
+    return workPhone;
+  }
 
   public String getMobilePhone() {
     return mobilePhone;
   }
 
-  public String getAllPhones() { return allPhones; }
+  public String getAllPhones() {
+    return allPhones;
+  }
 
   public String getEmail() {
     return email;
@@ -125,13 +141,21 @@ public class ContactData {
     return emailWork;
   }
 
-  public String getAllEmails() { return allEmails; }
+  public String getAllEmails() {
+    return allEmails;
+  }
 
   public String getGroup() {
     return group;
   }
 
-  public String getHomepage() { return homepage; }
+  public String getHomepage() {
+    return homepage;
+  }
+
+  public File getPhoto() {
+    return photo;
+  }
 
 
   @Override
