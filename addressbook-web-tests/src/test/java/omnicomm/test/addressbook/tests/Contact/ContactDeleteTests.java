@@ -1,8 +1,8 @@
-package omnicomm.test.addressbook.tests;
+package omnicomm.test.addressbook.tests.Contact;
 
 import omnicomm.test.addressbook.model.ContactData;
 import omnicomm.test.addressbook.model.Contacts;
-import org.testng.Assert;
+import omnicomm.test.addressbook.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

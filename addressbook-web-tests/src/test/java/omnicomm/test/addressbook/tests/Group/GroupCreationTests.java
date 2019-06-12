@@ -1,7 +1,8 @@
-package omnicomm.test.addressbook.tests;
+package omnicomm.test.addressbook.tests.Group;
 
 import omnicomm.test.addressbook.model.GroupData;
 import omnicomm.test.addressbook.model.Groups;
+import omnicomm.test.addressbook.tests.TestBase;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
