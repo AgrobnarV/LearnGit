@@ -7,7 +7,10 @@ import omnicomm.test.addressbook.tests.TestBase;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,12 +21,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactAddTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validContacts() {
+  public Iterator<Object[]> validContacts() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
     File photo = new File("src/test/resources/test1.jpg");
-    list.add(new Object[]{new ContactData().withFirstname("test 13").withLastname("test 23").withPhoto(photo).withAddress("Russia, Moscow").withTelephone("+1234567890").withEmail("test1@mail.ru").withHomepage("ololo.ru").withGroup("test 1")});
-    list.add(new Object[]{new ContactData().withFirstname("test 33").withLastname("test 43").withPhoto(photo).withAddress("USA, New York").withTelephone("+6999021021").withEmail("test2@yandex.ru").withHomepage("kuskus.com").withGroup("test 1")});
-    list.add(new Object[]{new ContactData().withFirstname("test 53").withLastname("test 63").withPhoto(photo).withAddress("UK, London").withTelephone("+4412587098").withEmail("test3@gmail.com").withHomepage("tapok.net").withGroup("one")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+    String line = reader.readLine();
+    while (line != null) {
+      String[] split = line.split(";");
+      list.add(new Object[]{new ContactData()
+              .withFirstname(split[0])
+              .withLastname(split[1])
+              .withTelephone(split[2])
+              .withEmail(split[3])
+              .withAddress(split[4])
+              .withGroup(split[5])});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
 
