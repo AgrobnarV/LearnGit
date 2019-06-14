@@ -1,0 +1,27 @@
+<list>
+  <group>
+    <gname>test 0</gname>
+    <gheader>header 0</gheader>
+    <gfooter>footer 0</gfooter>
+  </group>
+  <group>
+    <gname>test 1</gname>
+    <gheader>header 1</gheader>
+    <gfooter>footer 1</gfooter>
+  </group>
+  <group>
+    <gname>test 2</gname>
+    <gheader>header 2</gheader>
+    <gfooter>footer 2</gfooter>
+  </group>
+  <group>
+    <gname>test 3</gname>
+    <gheader>header 3</gheader>
+    <gfooter>footer 3</gfooter>
+  </group>
+  <group>
+    <gname>test 4</gname>
+    <gheader>header 4</gheader>
+    <gfooter>footer 4</gfooter>
+  </group>
+</list>

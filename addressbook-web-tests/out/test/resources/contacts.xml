@@ -1,0 +1,42 @@
+<list>
+  <contact>
+    <firstname>test 0</firstname>
+    <lastname>test 0</lastname>
+    <telephone>test 0</telephone>
+    <email>test 0</email>
+    <group>test 0</group>
+    <homepage>test 0</homepage>
+  </contact>
+  <contact>
+    <firstname>test 1</firstname>
+    <lastname>test 1</lastname>
+    <telephone>test 1</telephone>
+    <email>test 1</email>
+    <group>test 1</group>
+    <homepage>test 1</homepage>
+  </contact>
+  <contact>
+    <firstname>test 2</firstname>
+    <lastname>test 2</lastname>
+    <telephone>test 2</telephone>
+    <email>test 2</email>
+    <group>test 2</group>
+    <homepage>test 2</homepage>
+  </contact>
+  <contact>
+    <firstname>test 3</firstname>
+    <lastname>test 3</lastname>
+    <telephone>test 3</telephone>
+    <email>test 3</email>
+    <group>test 3</group>
+    <homepage>test 3</homepage>
+  </contact>
+  <contact>
+    <firstname>test 4</firstname>
+    <lastname>test 4</lastname>
+    <telephone>test 4</telephone>
+    <email>test 4</email>
+    <group>test 4</group>
+    <homepage>test 4</homepage>
+  </contact>
+</list>
