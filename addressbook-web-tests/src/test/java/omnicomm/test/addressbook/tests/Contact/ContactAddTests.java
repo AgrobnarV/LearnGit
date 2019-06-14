@@ -1,5 +1,7 @@
 package omnicomm.test.addressbook.tests.Contact;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import omnicomm.test.addressbook.model.ContactData;
 import omnicomm.test.addressbook.model.Contacts;
@@ -12,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactAddTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validContacts() throws IOException {
+  public Iterator<Object[]> validContactsXml() throws IOException {
     File photo = new File("src/test/resources/test1.jpg");
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
     String xml = "";
@@ -38,7 +39,23 @@ public class ContactAddTests extends TestBase {
     return contact.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
   }
 
-  @Test(dataProvider = "validContacts")
+  @DataProvider
+  public Iterator<Object[]> validContactsJson() throws IOException {
+    File photo = new File("src/test/resources/Swi.png");
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+    String json = "";
+    String line = reader.readLine();
+    while (line != null){
+      json += line;
+      line= reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<ContactData> contact = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
+    return contact.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+  }
+
+
+  @Test(dataProvider = "validContactsJson")
   public void testNewContact(ContactData contacts) throws Exception {
     /*   File photo = new File("src/test/resources/test1.jpg");
     ContactData contact = new ContactData()

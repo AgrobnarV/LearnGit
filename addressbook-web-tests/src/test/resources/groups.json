@@ -1,0 +1,27 @@
+[
+  {
+    "gname": "test 0",
+    "gheader": "header 0",
+    "gfooter": "footer 0"
+  },
+  {
+    "gname": "test 1",
+    "gheader": "header 1",
+    "gfooter": "footer 1"
+  },
+  {
+    "gname": "test 2",
+    "gheader": "header 2",
+    "gfooter": "footer 2"
+  },
+  {
+    "gname": "test 3",
+    "gheader": "header 3",
+    "gfooter": "footer 3"
+  },
+  {
+    "gname": "test 4",
+    "gheader": "header 4",
+    "gfooter": "footer 4"
+  }
+]

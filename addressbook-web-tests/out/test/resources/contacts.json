@@ -1,0 +1,42 @@
+[
+  {
+    "firstname": "test 0",
+    "lastname": "test 0",
+    "telephone": "test 0",
+    "email": "test 0",
+    "group": "test 0",
+    "homepage": "test 0"
+  },
+  {
+    "firstname": "test 1",
+    "lastname": "test 1",
+    "telephone": "test 1",
+    "email": "test 1",
+    "group": "test 1",
+    "homepage": "test 1"
+  },
+  {
+    "firstname": "test 2",
+    "lastname": "test 2",
+    "telephone": "test 2",
+    "email": "test 2",
+    "group": "test 2",
+    "homepage": "test 2"
+  },
+  {
+    "firstname": "test 3",
+    "lastname": "test 3",
+    "telephone": "test 3",
+    "email": "test 3",
+    "group": "test 3",
+    "homepage": "test 3"
+  },
+  {
+    "firstname": "test 4",
+    "lastname": "test 4",
+    "telephone": "test 4",
+    "email": "test 4",
+    "group": "test 4",
+    "homepage": "test 4"
+  }
+]

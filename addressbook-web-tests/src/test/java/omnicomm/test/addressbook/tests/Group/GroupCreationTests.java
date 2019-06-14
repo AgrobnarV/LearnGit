@@ -1,5 +1,7 @@
 package omnicomm.test.addressbook.tests.Group;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import omnicomm.test.addressbook.model.GroupData;
 import omnicomm.test.addressbook.model.Groups;
@@ -8,7 +10,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupCreationTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validGroups() throws IOException {
+  public Iterator<Object[]> validGroupsFromXML() throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
     String xml = "";
     String line = reader.readLine();
@@ -34,7 +35,21 @@ public class GroupCreationTests extends TestBase {
     return group.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test(dataProvider = "validGroups")
+  @DataProvider
+  public Iterator<Object[]> validGroupsFromJSON() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
+    String json = "";
+    String line = reader.readLine();
+    while (line != null){
+      json += line;
+      line = reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<GroupData> group = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType()); //GroupData.class
+    return group.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+  }
+
+  @Test(dataProvider = "validGroupsFromXML")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().all();
