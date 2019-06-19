@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite2" verbose="1" >
+<test name="Contacts">
+    <classes>
+        <class name="omnicomm.test.addressbook.tests.Contact.ContactAddTests"/>
+        <class name="omnicomm.test.addressbook.tests.Contact.ContactDeleteTests"/>
+        <class name="omnicomm.test.addressbook.tests.Contact.ContactModificationTests"/>
+        <class name="omnicomm.test.addressbook.tests.Contact.ContactPhoneTests"/>
+    </classes>
+</test>
+</suite>
