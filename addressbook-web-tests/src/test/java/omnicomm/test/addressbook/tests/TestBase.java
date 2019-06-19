@@ -1,7 +1,6 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.appmanager.ApplicationManager;
-import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
