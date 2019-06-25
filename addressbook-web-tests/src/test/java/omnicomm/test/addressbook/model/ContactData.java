@@ -78,7 +78,7 @@ public class ContactData {
 
   @Column(name = "photo")
   @Type(type = "text")
-  private File photo;
+  private String photo;
 
   public ContactData withId(int id) {
     this.id = id;
@@ -152,7 +152,7 @@ public class ContactData {
 
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -214,14 +214,15 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
 
   @Override
   public String toString() {
     return "ContactData{" +
-            "firstname='" + firstname + '\'' +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             '}';
   }
