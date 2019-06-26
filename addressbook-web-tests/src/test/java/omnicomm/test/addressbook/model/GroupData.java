@@ -85,11 +85,13 @@ public class GroupData {
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
     return id == groupData.id &&
-            Objects.equals(gname, groupData.gname);
+            Objects.equals(gname, groupData.gname) &&
+            Objects.equals(gheader, groupData.gheader) &&
+            Objects.equals(gfooter, groupData.gfooter);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, gname);
+    return Objects.hash(id, gname, gheader, gfooter);
   }
 }

@@ -60,26 +60,17 @@ public class ContactAddTests extends TestBase {
 
   @Test(dataProvider = "validContactsJson")
   public void testNewContact(ContactData contacts) throws Exception {
-    /*   File photo = new File("src/test/resources/test1.jpg");
-    ContactData contact = new ContactData()
-            .withFirstname("test23")
-            .withLastname("test33")
-            .withAddress("Moscow123")
-            .withTelephone("+1234567890")
-            .withEmail("primer2@mail.ru")
-            .withGroup("one")
-            .withPhoto(photo); */
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withGname("test 1"));
 
     }
+    Contacts before = app.db().contacts();
     app.goTo().homePage();
-    Contacts before = app.contact().contAll();
     app.contact().buttonAddContact();
     app.contact().createContact(contacts);
-    Contacts after = app.contact().contAll();
     assertThat(app.group().count(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contacts.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));   //максимум среди id всех контактов
   }
