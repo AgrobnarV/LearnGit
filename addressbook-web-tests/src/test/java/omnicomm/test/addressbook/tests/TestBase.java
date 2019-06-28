@@ -1,6 +1,9 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.appmanager.ApplicationManager;
+import omnicomm.test.addressbook.model.Contacts;
+import omnicomm.test.addressbook.model.GroupData;
+import omnicomm.test.addressbook.model.Groups;
 import omnicomm.test.addressbook.tests.Group.GroupCreationTests;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
@@ -12,6 +15,10 @@ import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
   Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
@@ -24,21 +31,39 @@ public class TestBase {
     app.init();
   }
 
-  @AfterSuite(alwaysRun =  true)
+  @AfterSuite(alwaysRun = true)
   public void tearDown() {
     app.stop();
   }
 
-  @BeforeMethod(alwaysRun =  true)
-  public void  logTestStart(Method m, Object[] p ){
-    logger.info("Start test" + m.getName()+ "with parameters" + Arrays.asList(p));
+  @BeforeMethod(alwaysRun = true)
+  public void logTestStart(Method m, Object[] p) {
+    logger.info("Start test" + m.getName() + "with parameters" + Arrays.asList(p));
 
   }
 
-  @AfterMethod(alwaysRun =  true)
-  public void logTestStop(Method m){
+  @AfterMethod(alwaysRun = true)
+  public void logTestStop(Method m) {
     logger.info("Stop test" + m.getName());
 
   }
 
+  public void verifyGroupListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Groups dbGroups = app.db().groups();
+      Groups uiGroups = app.group().all();
+      assertThat(uiGroups, equalTo(dbGroups.stream().map((g) -> new GroupData()
+              .withId(g.getId())
+              .withGname(g.getGname()))
+              .collect(Collectors.toSet())));
+    }
+  }
+
+  public void verifyContactListInUI() {
+    if(Boolean.getBoolean("verifyUI")){
+      Contacts dbContacts = app.db().contacts();
+      Contacts uiContacts = app.contact().contAll();
+      assertThat(uiContacts, equalTo(dbContacts));
+    }
+  }
 }

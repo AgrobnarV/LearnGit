@@ -19,7 +19,7 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
-  private ContactHelper contact;
+  private ContactHelper contactHelper;
   private String browser;
   private DbHelper dbHelper;
 
@@ -46,7 +46,7 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
     groupHelper = new GroupHelper(wd);
-    contact = new ContactHelper(wd);
+    contactHelper = new ContactHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
@@ -65,7 +65,7 @@ public class ApplicationManager {
   }
 
   public ContactHelper contact() {
-    return contact;
+    return contactHelper;
   }
 
   public SessionHelper getSessionHelper() {

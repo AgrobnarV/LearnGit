@@ -18,8 +18,8 @@ public class ContactDeleteTests extends TestBase {
       app.contact().createContact(new ContactData()
               .withAddress("test3")
               .withTelephone("test4")
-              .withEmail("test1@test.ru")
-              .withGroup("test5"));
+              .withEmail("test1@test.ru"));
+//              .withGroup("test5"));
     }
   }
 
@@ -32,5 +32,6 @@ public class ContactDeleteTests extends TestBase {
     Contacts after = app.contact().contAll();
     assertThat(after, equalTo(
             before.withoutContact(deletedContact)));
+    verifyContactListInUI();
   }
 }

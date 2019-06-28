@@ -20,8 +20,8 @@ public class ContactModificationTests extends TestBase {
               .withLastname("test2")
               .withAddress("test3")
               .withTelephone("test4")
-              .withEmail("test1@test.ru")
-              .withGroup("test5"));
+              .withEmail("test1@test.ru"));
+      //      .withGroup("test5"));
     }
   }
 
@@ -36,12 +36,13 @@ public class ContactModificationTests extends TestBase {
             .withLastname("test2")
             .withAddress("test3")
             .withTelephone("test4")
-            .withEmail("test5@test6.ru")
-            .withGroup("test123");
+            .withEmail("test5@test6.ru");
+    //           .withGroup("test123");
     app.contact().modify(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withoutContact(modifiedContact).withAdded(contact)));
+    verifyContactListInUI();
   }
 }

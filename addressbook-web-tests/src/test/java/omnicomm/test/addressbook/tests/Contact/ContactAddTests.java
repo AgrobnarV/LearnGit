@@ -73,5 +73,6 @@ public class ContactAddTests extends TestBase {
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contacts.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));   //максимум среди id всех контактов
+    verifyContactListInUI();
   }
 }

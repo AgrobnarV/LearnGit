@@ -27,6 +27,7 @@ public class ContactPhoneTests extends TestBase {
               .withEmailHome("test2@yandex.ru")
               .withEmailWork("test3@mail.ru")
               .withHomepage("testbase.ru");
+ //           .withGroup("test4");
       app.contact().createContact(newContact);
       app.goTo().homePage();
     }
@@ -40,6 +41,7 @@ public class ContactPhoneTests extends TestBase {
     MatcherAssert.assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
     assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    verifyContactListInUI();
   }
 
   private String mergeEmails(ContactData contact) {

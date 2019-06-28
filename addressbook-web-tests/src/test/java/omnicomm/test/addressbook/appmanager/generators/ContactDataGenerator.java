@@ -80,8 +80,8 @@ public class ContactDataGenerator {
                 contact.getLastname(),
                 contact.getTelephone(),
                 contact.getEmail(),
-                contact.getHomepage(),
-                contact.getGroup()));
+                contact.getHomepage()));
+        //           contact.getGroup()));
       }
     }
   }
@@ -94,8 +94,8 @@ public class ContactDataGenerator {
               .withLastname(String.format("test %s", i))
               .withTelephone(String.format("test %s", i))
               .withEmail(String.format("test %s", i))
-              .withHomepage(String.format("test %s", i))
-              .withGroup(String.format("test %s", i)));
+              .withHomepage(String.format("test %s", i)));
+      //            .withGroup(String.format("test %s", i)))
     }
     return contacts;
   }
