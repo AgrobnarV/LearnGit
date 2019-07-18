@@ -58,6 +58,13 @@ public class GroupData {
     return this;
   }
 
+  @ManyToMany(mappedBy = "groups")
+  private Set<ContactData> contacts = new HashSet<ContactData>();
+
+  public Set<ContactData> getContacts() {
+    return contacts;
+  }
+
   public String getGname() {
     return gname;
   }
@@ -69,9 +76,6 @@ public class GroupData {
   public String getGfooter() {
     return gfooter;
   }
-
-  @ManyToMany(mappedBy = "groups")
-  private Set<ContactData> contacts = new HashSet<ContactData>();
 
   @Override
   public String toString() {
@@ -95,9 +99,5 @@ public class GroupData {
   @Override
   public int hashCode() {
     return Objects.hash(id, gname, gheader, gfooter);
-  }
-
-  public Contacts getContacts() {
-    return new Contacts(contacts);
   }
 }

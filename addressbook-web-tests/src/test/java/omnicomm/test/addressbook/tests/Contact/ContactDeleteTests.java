@@ -19,7 +19,7 @@ public class ContactDeleteTests extends TestBase {
               .withAddress("test3")
               .withTelephone("test4")
               .withEmail("test1@test.ru"));
-//              .withGroup("test5"));
+//            .withGroup("test5"));
     }
   }
 

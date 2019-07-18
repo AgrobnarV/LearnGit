@@ -2,13 +2,13 @@ package omnicomm.test.addressbook.appmanager;
 
 import omnicomm.test.addressbook.model.ContactData;
 import omnicomm.test.addressbook.model.Contacts;
+import omnicomm.test.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.io.File;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -17,7 +17,7 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void fillContactform(ContactData contactData, boolean creation) {
+  public void fillContact(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
@@ -27,12 +27,17 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"), contactData.getEmail());
     type(By.name("email2"), contactData.getEmailHome());
     type(By.name("email3"), contactData.getEmailWork());
-    attach(By.name("photo"),contactData.getPhoto());
+    attach(By.name("photo"), contactData.getPhoto());
+    type(By.name("homepage"), contactData.getHomepage());
 
     if (creation) {
-   //   new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-  //  } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups()
+                .iterator().next().getGname());
+      } else {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
     }
   }
 
@@ -49,10 +54,6 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
-  public void click(By locator) {
-    wd.findElement(locator).click();
-  }
-
   public void submitContact() {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
@@ -61,19 +62,25 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
- /* public void type(By locator, String text) {
-    click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
-  }*/
-
-
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
   }
 
+  public void addGroup() { click(By.name("Add to")); }
+
+  public void selectGroup(ContactData group) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getGroups()
+            .iterator().next().getGname());
+  }
+
+  public void addToGroup (ContactData contact, GroupData group){
+    selectContactById(contact.getId());
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getGname());
+    click(By.name("add"));
+  }
+
   public void createContact(ContactData contact) {
-    fillContactform(contact, true);
+    fillContact(contact, true);
     submitContact();
     contactCache = null;
     returnContact();
@@ -82,7 +89,7 @@ public class ContactHelper extends HelperBase {
   public void modify(ContactData contact) {
     selectContactById(contact.getId());
     picEditById(contact.getId());
-    fillContactform(contact, false);
+    fillContact(contact, false);
     buttonUpdate();
     contactCache = null;
     homePage();
@@ -94,6 +101,13 @@ public class ContactHelper extends HelperBase {
 
   public void picEditById(int id) {
     click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
+  }
+
+  public void removeGroupFrom(ContactData contactData) {
+    click(By.xpath(String.format("//a[@href='view.php?id=%s']/img[@alt='Details']", contactData.getId())));
+    click(By.linkText(contactData.getGroups().iterator().next().getGname()));
+    click(By.id(String.valueOf(contactData.getId())));
+    click(By.cssSelector("[name='remove']"));
   }
 
 

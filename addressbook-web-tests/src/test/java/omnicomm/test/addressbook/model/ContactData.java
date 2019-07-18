@@ -149,12 +149,10 @@ public class ContactData {
     return this;
   }
 
-
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
   }
-
 
   public int getId() {
     return id;
@@ -208,6 +206,15 @@ public class ContactData {
     return homepage;
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+
   @Column (name = "deprecated", columnDefinition = "DATETIME")
   public String deprecated;
   public File getPhoto() {
@@ -241,10 +248,6 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
-  }
-
-  public Groups getGroups() {
-    return new Groups(groups);
   }
 
   public String getDeprecated() {
