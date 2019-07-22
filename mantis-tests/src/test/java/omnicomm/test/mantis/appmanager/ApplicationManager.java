@@ -16,7 +16,8 @@ import java.util.regex.MatchResult;
 public class ApplicationManager {
   private final Properties properties;
   public WebDriver getDriver;
-  private WebDriver wd;
+  public WebDriver wd;
+  public FtpHelper ftp;
 
   private String browser;
   private RegistrationHelper registrationHelper;
@@ -30,14 +31,6 @@ public class ApplicationManager {
 
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-    if (browser.equals(BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    } else if (browser.equals(BrowserType.IE)) {
-      wd = new InternetExplorerDriver();
-    }
   }
 
   public void stop() {
@@ -61,8 +54,8 @@ public class ApplicationManager {
     return registrationHelper;
   }
 
-  public  WebDriver getDriver(){
-    if (wd == null){
+  public WebDriver getDriver() {
+    if (wd == null) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
       } else if (browser.equals(BrowserType.CHROME)) {
@@ -70,8 +63,14 @@ public class ApplicationManager {
       }
       wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
       wd.get(properties.getProperty("web.baseUrl"));
-
     }
-    return wd;
+      return wd;
+    }
+
+  public FtpHelper ftp(){
+    if (ftp == null) {
+      ftp = new FtpHelper(this);
+    }
+    return ftp;
   }
 }
