@@ -11,12 +11,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.MatchResult;
 
 public class ApplicationManager {
   private final Properties properties;
-  WebDriver wd;
+  public WebDriver getDriver;
+  private WebDriver wd;
 
   private String browser;
+  private RegistrationHelper registrationHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -35,13 +38,12 @@ public class ApplicationManager {
     } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
-
-    wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
   }
 
   public void stop() {
-    wd.quit();
+    if (wd != null) {
+      wd.quit();
+    }
   }
 
   public HttpSession NewSession() {
@@ -50,5 +52,26 @@ public class ApplicationManager {
 
   public String getProperty(String key) {
     return properties.getProperty(key);
+  }
+
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public  WebDriver getDriver(){
+    if (wd == null){
+      if (browser.equals(BrowserType.FIREFOX)) {
+        wd = new FirefoxDriver();
+      } else if (browser.equals(BrowserType.CHROME)) {
+        wd = new ChromeDriver();
+      }
+      wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      wd.get(properties.getProperty("web.baseUrl"));
+
+    }
+    return wd;
   }
 }
