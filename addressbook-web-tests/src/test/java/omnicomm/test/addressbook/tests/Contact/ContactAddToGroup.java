@@ -8,6 +8,8 @@ import omnicomm.test.addressbook.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -15,14 +17,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactAddToGroup extends TestBase {
 
-  @BeforeMethod
+/*  @BeforeMethod
   public void ensurePreconditions() {
     if(app.db().groups().size() == 0){
       app.goTo().homePage();
       app.group().create(new GroupData().withGname("test 1").withGheader("header").withGfooter("footer"));
     }
     if(app.db().contacts().size() == 0){
-      app.goTo().homePage();
       ContactData newContact = new ContactData()
               .withFirstname("name 1")
               .withLastname("lastname 1")
@@ -31,12 +32,23 @@ public class ContactAddToGroup extends TestBase {
               .withEmail("email 1");
       app.contact().createContact(newContact);
       app.goTo().homePage();
-    }
-
+    } */
+@BeforeMethod
+public void ensurePreconditions() {
+  if (app.db().groups().size() == 0) {
+    app.goTo().groupPage();
+    app.group().create(new GroupData().withGname("test12").withGheader("test23").withGfooter("test"));
   }
+  Groups groups = app.db().groups();
+  File photo = new File("src/test/resources/test1.jpg");
+  if (app.db().contacts().size() == 0) {
+    app.contact().buttonAddContact();
+    app.contact().createContact(new ContactData().withFirstname("test1").withLastname("test2").withAddress("test3").withTelephone("123").withEmail("test4").withPhoto(photo).inGroup(groups.iterator().next()));
+  }
+}
 
   @Test
-  public void contactAddToGroup() {
+/*   public void contactAddToGroup() {
     Groups groups = app.db().groups();
     Contacts contacts = app.db().contacts().stream().filter(contact -> contact.getGroups().size() < groups.size()).collect(Collectors.toCollection(Contacts::new));
 
@@ -48,7 +60,6 @@ public class ContactAddToGroup extends TestBase {
               .withTelephone("+380971785225")
               .withEmail("email 1");
       app.contact().createContact(newContact);
-      app.goTo().homePage();
       contacts = new Contacts().withAdded(newContact);
     }
     app.goTo().homePage();
@@ -57,5 +68,29 @@ public class ContactAddToGroup extends TestBase {
     app.contact().addToGroup(modify, groups.iterator().next());
     ContactData modified = app.db().contacts().stream().filter(c -> c.getId() == modify.getId()).collect(Collectors.toList()).iterator().next();
     assertThat(modified.getGroups(), equalTo(modify.getGroups().withAdded(groups.iterator().next())));
+  } */
+    public void addContactToGroupTest() {
+    Contacts contacts = app.db().contacts();
+    ContactData editedContact = contacts.iterator().next();
+    int idEditedContact = editedContact.getId();
+    Groups contactGroupsBefore = editedContact.getGroups();
+
+    if (contactGroupsBefore.size() == 0) {
+      Groups groups = app.db().groups();
+      GroupData addToGroup = groups.stream().iterator().next();
+      app.goTo().homePage();
+      app.contact().addToGroup(addToGroup, editedContact);
+      app.db().contacts();
+    }
+    app.goTo().homePage();
+    Groups groups = app.db().groups();
+    GroupData group = groups.stream().iterator().next();
+    Contacts after = app.db().contacts();
+    ContactData contactAfter = after.stream().filter(data -> Objects.equals(data.getId(), idEditedContact)).findFirst().get();
+    Groups contactGroupsAfter = contactAfter.getGroups();
+    assertThat(contactGroupsAfter, equalTo(contactGroupsBefore.withAdded(group)));
+    verifyContactListInUI();
   }
+
+
 }

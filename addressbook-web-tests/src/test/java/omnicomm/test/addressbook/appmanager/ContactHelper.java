@@ -68,15 +68,14 @@ public class ContactHelper extends HelperBase {
 
   public void addGroup() { click(By.name("Add to")); }
 
-  public void selectGroup(ContactData group) {
-    new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getGroups()
-            .iterator().next().getGname());
+  public void selectGroup(GroupData group) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getGname());
   }
 
-  public void addToGroup (ContactData contact, GroupData group){
+  public void addToGroup (GroupData group, ContactData contact){
     selectContactById(contact.getId());
-    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getGname());
-    click(By.name("add"));
+    selectGroup(group);
+    addGroup();
   }
 
   public void createContact(ContactData contact) {
@@ -103,11 +102,14 @@ public class ContactHelper extends HelperBase {
     click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
   }
 
-  public void removeGroupFrom(ContactData contactData) {
-    click(By.xpath(String.format("//a[@href='view.php?id=%s']/img[@alt='Details']", contactData.getId())));
-    click(By.linkText(contactData.getGroups().iterator().next().getGname()));
-    click(By.id(String.valueOf(contactData.getId())));
-    click(By.cssSelector("[name='remove']"));
+  public void removeFromGroup(ContactData editedContact, GroupData group) {
+    selectGroup(group);
+    selectContactById(editedContact.getId());
+    deleteFromGroup();
+  }
+
+  public void deleteFromGroup() {
+    click(By.name("remove"));
   }
 
 
