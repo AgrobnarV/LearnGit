@@ -32,3 +32,11 @@ build/
 .idea/libraries/Gradle__org_javassist_javassist_3_23_2_GA.xml
 .idea/modules/addressbook-web-tests.main.iml
 .idea/modules/addressbook-web-tests.test.iml
+.idea/modules.xml
+soap-sample/gradle/wrapper/gradle-wrapper.jar
+soap-sample/gradle/wrapper/gradle-wrapper.properties
+soap-sample/gradlew.bat
+soap-sample/gradlew
+.idea/modules/soap-sample.test.iml
+.idea/modules/soap-sample.main.iml
+.idea/modules/soap-sample.iml
