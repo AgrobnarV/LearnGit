@@ -1,8 +1,9 @@
 package omnicomm.test.addressbook.tests.Group;
 
-import omnicomm.test.addressbook.model.GroupData;
 import omnicomm.test.addressbook.model.Groups;
 import omnicomm.test.addressbook.tests.TestBase;
+import omnicomm.test.addressbook.model.GroupData;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -30,7 +31,7 @@ public class GroupModificationTests extends TestBase {
             .withGfooter("three");
     app.goTo().groupPage();
     app.group().modify(group);
-    assertThat(app.group().count(), equalTo(before.size())); //в интерфейсе кол-во групп не изменилось
+    MatcherAssert.assertThat(app.group().count(), equalTo(before.size())); //в интерфейсе кол-во групп не изменилось
     Groups after = app.db().groups();
     assertThat(after, equalTo(
             before.withoutGroup(modifiedGroup).withAdded(group)));

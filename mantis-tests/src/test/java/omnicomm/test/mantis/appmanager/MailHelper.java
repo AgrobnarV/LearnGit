@@ -1,5 +1,6 @@
 package omnicomm.test.mantis.appmanager;
 
+import omnicomm.test.mantis.model.MailMessage;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 

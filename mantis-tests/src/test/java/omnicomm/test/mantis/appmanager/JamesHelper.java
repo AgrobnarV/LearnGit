@@ -1,5 +1,6 @@
 package omnicomm.test.mantis.appmanager;
 
+import omnicomm.test.mantis.model.MailMessage;
 import org.apache.commons.net.telnet.TelnetClient;
 
 import javax.mail.*;

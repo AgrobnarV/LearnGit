@@ -1,10 +1,10 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.appmanager.ApplicationManager;
+import omnicomm.test.addressbook.tests.Group.GroupCreationTests;
 import omnicomm.test.addressbook.model.Contacts;
 import omnicomm.test.addressbook.model.GroupData;
 import omnicomm.test.addressbook.model.Groups;
-import omnicomm.test.addressbook.tests.Group.GroupCreationTests;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

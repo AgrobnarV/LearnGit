@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Groups" >
         <classes>
-            <class name="omnicomm.test.addressbook.tests.Group.GroupCreationTests" />
-            <class name="omnicomm.test.addressbook.tests.Group.GroupModificationTests" />
-            <class name="omnicomm.test.addressbook.tests.Group.GroupDeleteTests" />
+            <class name="GroupCreationTests" />
+            <class name="GroupModificationTests" />
+            <class name="GroupDeleteTests" />
         </classes>
     </test>
 </suite>

@@ -1,4 +1,4 @@
-package omnicomm.test.mantis.appmanager;
+package omnicomm.test.mantis.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

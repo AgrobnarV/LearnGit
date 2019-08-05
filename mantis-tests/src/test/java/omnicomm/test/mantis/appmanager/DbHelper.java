@@ -1,5 +1,6 @@
 package omnicomm.test.mantis.appmanager;
 
+import omnicomm.test.mantis.model.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -21,8 +22,8 @@ public class DbHelper {
   public Users users() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<UsersData> result = session.createQuery("from UsersData").list();
-    for (UsersData user : result) {
+    List result = session.createQuery("from UsersData").list();
+    for (Object user : result) {
       System.out.println(user);
     }
     session.getTransaction().commit();

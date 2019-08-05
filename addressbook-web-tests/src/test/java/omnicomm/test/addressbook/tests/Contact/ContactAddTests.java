@@ -3,10 +3,11 @@ package omnicomm.test.addressbook.tests.Contact;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
+import omnicomm.test.addressbook.tests.TestBase;
 import omnicomm.test.addressbook.model.ContactData;
 import omnicomm.test.addressbook.model.Contacts;
 import omnicomm.test.addressbook.model.GroupData;
-import omnicomm.test.addressbook.tests.TestBase;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -69,7 +70,7 @@ public class ContactAddTests extends TestBase {
     app.goTo().homePage();
     app.contact().buttonAddContact();
     app.contact().createContact(contacts);
-    assertThat(app.group().count(), equalTo(before.size() + 1));
+    MatcherAssert.assertThat(app.group().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contacts.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));   //максимум среди id всех контактов

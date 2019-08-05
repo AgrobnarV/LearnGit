@@ -68,7 +68,6 @@
     <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.axis:axis-jaxrpc:1.4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.axis:axis-saaj:1.4" level="project" />
-    <orderEntry type="module" module-name="addressbook-web-tests.test" scope="TEST" />
   </component>
   <component name="TestModuleProperties" production-module="mantis-tests.main" />
 </module>

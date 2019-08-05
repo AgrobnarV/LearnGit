@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

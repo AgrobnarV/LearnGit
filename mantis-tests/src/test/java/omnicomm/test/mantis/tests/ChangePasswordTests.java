@@ -1,7 +1,7 @@
 package omnicomm.test.mantis.tests;
 
-import omnicomm.test.mantis.appmanager.MailMessage;
-import omnicomm.test.mantis.appmanager.UsersData;
+import omnicomm.test.mantis.model.UsersData;
+import omnicomm.test.mantis.model.MailMessage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

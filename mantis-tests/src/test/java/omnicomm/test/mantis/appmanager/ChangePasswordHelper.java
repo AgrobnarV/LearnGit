@@ -1,5 +1,7 @@
 package omnicomm.test.mantis.appmanager;
 
+import omnicomm.test.mantis.model.MailMessage;
+import omnicomm.test.mantis.model.UsersData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import ru.lanwen.verbalregex.VerbalExpression;
