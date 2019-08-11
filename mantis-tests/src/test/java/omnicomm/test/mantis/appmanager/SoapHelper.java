@@ -30,20 +30,19 @@ public class SoapHelper {
 
   public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
     MantisConnectPortType mc = getMantisConnect();
-    String[] categories = mc.mc_project_get_categories("administrator", "123456", BigInteger.valueOf(issue.getProject().getId()));
+    String[] categories = mc.mc_project_get_categories("administrator", "123456", BigInteger.valueOf(issue.getId()));
     IssueData issueData = new IssueData();
-    issueData.setSummary(issue.getSummary());
+    issueData.setSummary(issue.getSubject());
     issueData.setDescription(issue.getDescription());
-    issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()), issue.getProject().getName()));
+    issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getId()), issue.getState_name()));
     issueData.setCategory(categories[0]);
     BigInteger issueId = mc.mc_issue_add("administrator", "123456", issueData);
     IssueData createdIssueData = mc.mc_issue_get("administrator", "123456", issueId);
     return new Issue().withId(createdIssueData.getId().intValue())
-            .withSummary(createdIssueData.getSummary())
+            .withSubject(createdIssueData.getSummary())
             .withDescription(createdIssueData.getDescription())
-            .withProject(new Project()
-                    .withId(createdIssueData.getProject().getId().intValue())
-                    .withName(createdIssueData.getProject().getName()));
+            .withId(createdIssueData.getProject().getId().intValue())
+            .withState_name(createdIssueData.getProject().getName());
   }
 
   private MantisConnectPortType getMantisConnect() throws MalformedURLException, ServiceException {
@@ -54,6 +53,6 @@ public class SoapHelper {
   public Issue issueStatus(int issueId) throws MalformedURLException, ServiceException, RemoteException {
     MantisConnectPortType mc = getMantisConnect();
     IssueData currentIssue = mc.mc_issue_get("administrator", "123456", BigInteger.valueOf(issueId));
-    return new Issue().withStatus(currentIssue.getStatus().toString());
+    return new Issue().withState_name(currentIssue.getStatus().toString());
   }
 }

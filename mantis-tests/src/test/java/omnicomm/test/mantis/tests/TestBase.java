@@ -1,5 +1,10 @@
 package omnicomm.test.mantis.tests;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import io.restassured.RestAssured;
 import omnicomm.test.mantis.appmanager.ApplicationManager;
 import omnicomm.test.mantis.model.Issue;
 import org.openqa.selenium.remote.BrowserType;
@@ -7,11 +12,9 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
+import java.util.Set;
 
 public class TestBase {
 
@@ -21,7 +24,7 @@ public class TestBase {
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {
     app.init();
-    app.ftp().upload(new File("src/test/resources/config_inc.php"),"config_inc.php","config_inc.php.bak");
+    app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.bak");
   }
 
   @AfterSuite(alwaysRun = true)
@@ -30,17 +33,26 @@ public class TestBase {
     app.stop();
   }
 
-  public boolean isIssueOpen (int issueID) throws RemoteException, ServiceException, MalformedURLException {
-    Issue myIssue = app.soap().issueStatus(issueID);
-    String status = myIssue.getStatus();
-    if (status.equals("resolved") || status.equals("closed")) {
+  public Issue issueById(int issueId) {
+    String json = RestAssured.get(String.format("http://bugify.stqa.ru/api/issues/%s.json", issueId)).asString();
+    JsonElement issues = new JsonParser().parse(json).getAsJsonObject().get("issues");
+    Set<Issue> issuesSet = new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
+    }.getType());
+    Issue issue = issuesSet.iterator().next();
+    return issue;
+  }
+
+  public boolean isIssueOpen(int issueID) {
+    Issue myIssue = issueById(issueID);
+    String status = myIssue.getState_name();
+    if (status.equals("Deleted") || status.equals("Closed")) {
       return false;
     } else {
       return true;
     }
   }
 
-  public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
+  public void skipIfNotFixed(int issueId) {
     if (isIssueOpen(issueId)) {
       System.out.println("Ignored because of unresolved issue " + issueId + " in Mantis bugtracker");
       throw new SkipException("Ignored because of issue " + issueId);

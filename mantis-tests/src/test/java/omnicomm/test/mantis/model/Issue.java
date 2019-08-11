@@ -4,10 +4,9 @@ import java.util.Objects;
 
 public class Issue {
   private int id;
-  private String summary;
+  private String subject;
   private String description;
-  private Project project;
-  private String status;
+  private String state_name;
 
   public int getId() {
     return id;
@@ -18,12 +17,12 @@ public class Issue {
     return this;
   }
 
-  public String getSummary() {
-    return summary;
+  public String getSubject() {
+    return subject;
   }
 
-  public Issue withSummary(String summary) {
-    this.summary = summary;
+  public Issue withSubject(String subject) {
+    this.subject = subject;
     return this;
   }
 
@@ -36,21 +35,12 @@ public class Issue {
     return this;
   }
 
-  public Project getProject() {
-    return project;
+  public String getState_name() {
+    return state_name;
   }
 
-  public Issue withProject(Project project) {
-    this.project = project;
-    return this;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public Issue withStatus(String status) {
-    this.status = status;
+  public Issue withState_name(String state_name) {
+    this.state_name = state_name;
     return this;
   }
 
@@ -60,12 +50,12 @@ public class Issue {
     if (o == null || getClass() != o.getClass()) return false;
     Issue issue = (Issue) o;
     return id == issue.id &&
-            Objects.equals(summary, issue.summary) &&
+            Objects.equals(subject, issue.subject) &&
             Objects.equals(description, issue.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, summary, description);
+    return Objects.hash(id, subject, description, state_name);
   }
 }
