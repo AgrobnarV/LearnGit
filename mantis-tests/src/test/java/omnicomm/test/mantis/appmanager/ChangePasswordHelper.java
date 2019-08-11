@@ -18,7 +18,7 @@ public class ChangePasswordHelper extends HelperBase {
   public void loginAsAdminAndManage() {
     wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
     type(By.name("username"), "administrator");
-    type(By.name("password"), "root");
+    type(By.name("password"), "123456");
     click(By.cssSelector("input[value='Login']"));
     click(By.linkText("Manage Users"));
   }
