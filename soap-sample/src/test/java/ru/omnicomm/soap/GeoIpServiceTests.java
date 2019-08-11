@@ -16,6 +16,6 @@ public class GeoIpServiceTests {
   @Test
   public void testInvalidIp() {
     String ipLocation = new GeoIPService().getGeoIPServiceSoap12().getIpLocation("77.243.98.xxx");
-    assertEquals(ipLocation, "<GeoIP><Country>RU</Country><State>48</State></GeoIP>");
+    assertEquals(ipLocation, "<GeoIP><Country>US</Country><State>CA</State></GeoIP>");
   }
 }

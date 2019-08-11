@@ -23,6 +23,10 @@ dependencies {
     compile 'mysql:mysql-connector-java:8.0.16'
     compile 'org.hibernate:hibernate-agroal:5.3.10.Final'
     compile 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.9'
+    implementation 'io.rest-assured:rest-assured:4.0.0'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.9'
+    implementation 'com.google.code.gson:gson:2.8.5'
     
 }
 

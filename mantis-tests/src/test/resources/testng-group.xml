@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Groups" >
         <classes>
-            <class name="GroupCreationTests" />
-            <class name="GroupModificationTests" />
-            <class name="GroupDeleteTests" />
+            <class name="omnicomm.test.mantis.tests.SoapTests" />
+            <class name="omnicomm.test.mantis.tests.RestTests" />
+            <class name="omnicomm.test.mantis.tests.LoginTests" />
         </classes>
     </test>
 </suite>
