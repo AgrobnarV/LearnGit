@@ -5,12 +5,14 @@ import org.testng.annotations.Test;
 
 import java.math.RoundingMode;
 
+import static org.testng.Assert.assertEquals;
+
 public class PointTests {
   @Test
   public void TestCommonPoint() {
     Point a = new Point(25, 16);
     Point b = new Point(1, 15);
-    Assert.assertEquals(24.020824298928627, b.getDistance(a));
+    assertEquals(24.020824298928627, b.getDistance(a));
     //  Assert.assertEquals(b.getDistance(a),4);
   }
   @Test
@@ -30,7 +32,7 @@ public class PointTests {
   private void TestWithFirstNullPoint() {
     Point a = new Point (0,0);
     Point b = new Point (2,2);
-    Assert.assertEquals(b.getDistance(a),2.8284271247461903);
+    assertEquals(b.getDistance(a),2.8284271247461903);
     Assert.assertTrue(Math.round(b.getDistance(a)) == 3.0);
     Assert.assertFalse(Math.round(b.getDistance(a)) == 2.82);
   }
@@ -38,7 +40,7 @@ public class PointTests {
   private void TestWithSecondNullPoint() {
     Point a = new Point (5,5);
     Point b = new Point (0,0);
-    Assert.assertEquals(b.getDistance(a),7.0710678118654755);
+    assertEquals(b.getDistance(a),7.0710678118654755);
     Assert.assertTrue(Math.round(b.getDistance(a)) == 7.0);
     Assert.assertFalse(Math.round(b.getDistance(a)) == 7.1);
   }

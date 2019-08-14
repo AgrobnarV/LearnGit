@@ -3,6 +3,8 @@ package omnicomm.program;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
 
 public class RectangleTests {
 
@@ -10,6 +12,6 @@ public class RectangleTests {
   public void TestArea() {
 
     Rectangle r = new Rectangle (4,6);
-    Assert.assertEquals(r.area(),25.0);
+    assertEquals(r.area(),24.0);
   }
 }
