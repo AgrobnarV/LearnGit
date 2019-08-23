@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -47,7 +48,7 @@ public void ensurePreconditions() {
 }
 
   @Test
-/*   public void contactAddToGroup() {
+   public void contactAddToGroup() {
     Groups groups = app.db().groups();
     Contacts contacts = app.db().contacts().stream().filter(contact -> contact.getGroups().size() < groups.size()).collect(Collectors.toCollection(Contacts::new));
 
@@ -64,32 +65,8 @@ public void ensurePreconditions() {
     app.goTo().homePage();
     ContactData modify = contacts.iterator().next();
     groups.removeAll(modify.getGroups());
-    app.contact().addToGroup(modify, groups.iterator().next());
+    app.contact().addToGroup(groups.iterator().next(), modify);
     ContactData modified = app.db().contacts().stream().filter(c -> c.getId() == modify.getId()).collect(Collectors.toList()).iterator().next();
     assertThat(modified.getGroups(), equalTo(modify.getGroups().withAdded(groups.iterator().next())));
-  } */
-    public void addContactToGroupTest() {
-    Contacts contacts = app.db().contacts();
-    ContactData editedContact = contacts.iterator().next();
-    int idEditedContact = editedContact.getId();
-    Groups contactGroupsBefore = editedContact.getGroups();
-
-    if (contactGroupsBefore.size() == 0) {
-      Groups groups = app.db().groups();
-      GroupData addToGroup = groups.stream().iterator().next();
-      app.goTo().homePage();
-      app.contact().addToGroup(addToGroup, editedContact);
-      app.db().contacts();
-    }
-    app.goTo().homePage();
-    Groups groups = app.db().groups();
-    GroupData group = groups.stream().iterator().next();
-    Contacts after = app.db().contacts();
-    ContactData contactAfter = after.stream().filter(data -> Objects.equals(data.getId(), idEditedContact)).findFirst().get();
-    Groups contactGroupsAfter = contactAfter.getGroups();
-    assertThat(contactGroupsAfter, equalTo(contactGroupsBefore.withAdded(group)));
-    verifyContactListInUI();
   }
-
-
 }

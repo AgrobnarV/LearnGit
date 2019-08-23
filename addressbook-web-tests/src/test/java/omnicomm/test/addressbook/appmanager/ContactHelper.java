@@ -66,7 +66,7 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
   }
 
-  public void addGroup() { click(By.name("Add to")); }
+  public void addGroup() { click(By.name("add")); }
 
   public void selectGroup(GroupData group) {
     new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getGname());
