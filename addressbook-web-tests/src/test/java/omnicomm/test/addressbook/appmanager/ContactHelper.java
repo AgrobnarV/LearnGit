@@ -36,7 +36,7 @@ public class ContactHelper extends HelperBase {
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups()
                 .iterator().next().getGname());
       } else {
-        Assert.assertFalse(isElementPresent(By.name("new_group")));
+        Assert.assertTrue(isElementPresent(By.name("new_group")));
       }
     }
   }
