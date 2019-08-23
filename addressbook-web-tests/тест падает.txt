@@ -1,0 +1,50 @@
+Запущен изменением в SCM
+Running as SYSTEM
+Building in workspace C:\Users\Андрей\.jenkins\workspace\addressbook-web-tests-windows
+No credentials specified
+ > C:\Program Files\Git\bin\git.exe rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > C:\Program Files\Git\bin\git.exe config remote.origin.url https://github.com/AgrobnarV/LearnGit # timeout=10
+Fetching upstream changes from https://github.com/AgrobnarV/LearnGit
+ > C:\Program Files\Git\bin\git.exe --version # timeout=10
+ > C:\Program Files\Git\bin\git.exe fetch --tags --force --progress https://github.com/AgrobnarV/LearnGit +refs/heads/*:refs/remotes/origin/*
+ > C:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+ > C:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/origin/master^{commit}" # timeout=10
+Checking out Revision e3f391893a8e9c4536848c8aaa37021a78958775 (refs/remotes/origin/master)
+ > C:\Program Files\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\bin\git.exe checkout -f e3f391893a8e9c4536848c8aaa37021a78958775
+Commit message: "Переключение на удаленную сборку"
+ > C:\Program Files\Git\bin\git.exe rev-list --no-walk 0011346eb63822423d6b5b93900dd7f80614deaa # timeout=10
+[Gradle] - Launching build.
+[addressbook-web-tests] $ cmd.exe /C "C:\Users\Андрей\Desktop\java_test\gradle-5.3.1\bin\gradle.bat -Pbrowser=firefox -Ptarget=remote -Pplatrform=win7 clean testGroups && exit %%ERRORLEVEL%%"
+Starting a Gradle Daemon, 1 busy and 12 stopped Daemons could not be reused, use --status for details
+> Task :clean
+> Task :compileJava NO-SOURCE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+
+> Task :compileTestJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :processTestResources
+> Task :testClasses
+> Task :testGroups FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':testGroups'.
+> There were failing tests. See the report at: file:///C:/Users/Андрей/.jenkins/workspace/addressbook-web-tests-windows/addressbook-web-tests/build/reports/tests/testGroups/index.html
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 6s
+4 actionable tasks: 4 executed
+Build step 'Invoke Gradle script' changed build result to FAILURE
+Build step 'Invoke Gradle script' marked build as failure
+Recording test results
+Finished: FAILURE
