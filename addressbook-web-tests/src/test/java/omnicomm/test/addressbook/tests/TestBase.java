@@ -1,6 +1,7 @@
 package omnicomm.test.addressbook.tests;
 
 import omnicomm.test.addressbook.appmanager.ApplicationManager;
+import omnicomm.test.addressbook.tests.Contact.MyTestListener;
 import omnicomm.test.addressbook.tests.Group.GroupCreationTests;
 import omnicomm.test.addressbook.model.Contacts;
 import omnicomm.test.addressbook.model.GroupData;
@@ -8,10 +9,8 @@ import omnicomm.test.addressbook.model.Groups;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -20,6 +19,8 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Listeners(MyTestListener.class)
+
 public class TestBase {
   Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
 
@@ -27,8 +28,9 @@ public class TestBase {
           = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
   @BeforeSuite
-  public void setUp() throws Exception {
+  public void setUp(ITestContext context) throws Exception {
     app.init();
+    context.setAttribute("app",app);
   }
 
   @AfterSuite(alwaysRun = true)
