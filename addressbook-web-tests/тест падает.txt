@@ -1,4 +1,4 @@
-Запущен изменением в SCM
+Started by user test1
 Running as SYSTEM
 Building in workspace C:\Users\Андрей\.jenkins\workspace\addressbook-web-tests-windows
 No credentials specified
@@ -10,14 +10,14 @@ Fetching upstream changes from https://github.com/AgrobnarV/LearnGit
  > C:\Program Files\Git\bin\git.exe fetch --tags --force --progress https://github.com/AgrobnarV/LearnGit +refs/heads/*:refs/remotes/origin/*
  > C:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
  > C:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/origin/master^{commit}" # timeout=10
-Checking out Revision e3f391893a8e9c4536848c8aaa37021a78958775 (refs/remotes/origin/master)
+Checking out Revision 789f2f55f7d831444d488fd3fa1447c5cee2f9dc (refs/remotes/origin/master)
  > C:\Program Files\Git\bin\git.exe config core.sparsecheckout # timeout=10
- > C:\Program Files\Git\bin\git.exe checkout -f e3f391893a8e9c4536848c8aaa37021a78958775
-Commit message: "Переключение на удаленную сборку"
- > C:\Program Files\Git\bin\git.exe rev-list --no-walk 0011346eb63822423d6b5b93900dd7f80614deaa # timeout=10
+ > C:\Program Files\Git\bin\git.exe checkout -f 789f2f55f7d831444d488fd3fa1447c5cee2f9dc
+Commit message: "Исправление по testsng"
+ > C:\Program Files\Git\bin\git.exe rev-list --no-walk b6e5f8ff509566311b99846422c2582e9ad54402 # timeout=10
 [Gradle] - Launching build.
-[addressbook-web-tests] $ cmd.exe /C "C:\Users\Андрей\Desktop\java_test\gradle-5.3.1\bin\gradle.bat -Pbrowser=firefox -Ptarget=remote -Pplatrform=win7 clean testGroups && exit %%ERRORLEVEL%%"
-Starting a Gradle Daemon, 1 busy and 12 stopped Daemons could not be reused, use --status for details
+[addressbook-web-tests] $ cmd.exe /C "C:\Users\Андрей\Desktop\java_test\gradle-5.3.1\bin\gradle.bat -Pbrowser=chrome -Ptarget=remote -Pplatrform=win7 clean testGroups && exit %%ERRORLEVEL%%"
+Starting a Gradle Daemon, 2 incompatible and 5 stopped Daemons could not be reused, use --status for details
 > Task :clean
 > Task :compileJava NO-SOURCE
 > Task :processResources NO-SOURCE
@@ -29,6 +29,35 @@ Note: Recompile with -Xlint:unchecked for details.
 
 > Task :processTestResources
 > Task :testClasses
+
+> Task :testGroups
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupCreationTests > testGroupCreation[0](GroupData{id='2147483647', gname='test 0'}) FAILED
+    java.lang.NullPointerException at GroupCreationTests.java:59
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupCreationTests > testGroupCreation[1](GroupData{id='2147483647', gname='test 1'}) FAILED
+    java.lang.NullPointerException at GroupCreationTests.java:59
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupCreationTests > testGroupCreation[2](GroupData{id='2147483647', gname='test 2'}) FAILED
+    java.lang.NullPointerException at GroupCreationTests.java:59
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupCreationTests > testGroupCreation[3](GroupData{id='2147483647', gname='test 3'}) FAILED
+    java.lang.NullPointerException at GroupCreationTests.java:59
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupCreationTests > testGroupCreation[4](GroupData{id='2147483647', gname='test 4'}) FAILED
+    java.lang.NullPointerException at GroupCreationTests.java:59
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupModificationTests > ensurePrecondition FAILED
+    java.lang.NullPointerException at GroupModificationTests.java:18
+
+Suite1 > Groups > omnicomm.test.addressbook.tests.Group.GroupDeleteTests > ensurePrecondition FAILED
+    java.lang.NullPointerException at GroupDeleteTests.java:16
+
+omnicomm.test.addressbook.tests.Group.GroupCreationTests.tearDown FAILED
+    java.lang.NullPointerException
+
+10 tests completed, 8 failed, 2 skipped
+
 > Task :testGroups FAILED
 
 FAILURE: Build failed with an exception.
@@ -42,7 +71,7 @@ Run with --stacktrace option to get the stack trace. Run with --info or --debug 
 
 * Get more help at https://help.gradle.org
 
-BUILD FAILED in 6s
+BUILD FAILED in 14s
 4 actionable tasks: 4 executed
 Build step 'Invoke Gradle script' changed build result to FAILURE
 Build step 'Invoke Gradle script' marked build as failure
